@@ -1,0 +1,11 @@
+{
+  "case_id": "CL-CONS-001",
+  "title": "工业视觉质检市场进入建议证据审计",
+  "disclosure": "公开问题原型驱动、脱敏重构的可复现实战案例｜非真实客户文件",
+  "claims": 28,
+  "planted_risks": 14,
+  "evidence_groups": 10,
+  "report": "report.docx",
+  "sources": "evidence",
+  "labels": "labels.json"
+}

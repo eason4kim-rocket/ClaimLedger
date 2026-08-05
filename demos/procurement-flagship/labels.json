@@ -1,0 +1,423 @@
+{
+  "name": "claimledger-procurement-flagship-v1",
+  "disclosure": "Public-problem-inspired, anonymized reconstructed demonstration; not a real customer file.",
+  "cases": [
+    {
+      "name": "procurement-renewal",
+      "report": "report.docx",
+      "sources": "evidence",
+      "profile": "lite",
+      "rule_pack": "procurement-zh",
+      "as_of_date": "2026-07-18",
+      "claims": [
+        {
+          "text": "评估期间为2025年7月1日至2026年6月30日。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "01_审计口径与决策门槛.docx"
+        },
+        {
+          "text": "年度需求为1200万个750mL双淋膜纸餐盒。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "01_审计口径与决策门槛.docx"
+        },
+        {
+          "text": "年度预算为1080万元。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "01_审计口径与决策门槛.docx"
+        },
+        {
+          "text": "采购委员会已批准供应商B占70%、供应商A占30%的正式份额。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "evidence_file": "17_采购评审会议纪要及利益冲突声明.docx"
+        },
+        {
+          "text": "切换供应商B每年可节省168万元。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "evidence_file": "02_三家供应商报价与TCO测算.xlsx"
+        },
+        {
+          "text": "供应商B的综合到岸成本最低。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "evidence_file": "02_三家供应商报价与TCO测算.xlsx"
+        },
+        {
+          "text": "三份报价均有效至2026年9月30日。",
+          "should_flag": true,
+          "expected_status": "partial",
+          "accepted_statuses": [
+            "partial",
+            "conflict"
+          ],
+          "evidence_file": "05_供应商B报价单_扫描.pdf"
+        },
+        {
+          "text": "供应商A报价0.82元/个，含税含运。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "04_供应商A报价单.pdf"
+        },
+        {
+          "text": "供应商B报价0.68元/个，含税。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "evidence_file": "02_三家供应商报价与TCO测算.xlsx"
+        },
+        {
+          "text": "供应商C报价0.77元/个，含税含运。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "06_供应商C报价单.pdf"
+        },
+        {
+          "text": "供应商B报价包含运费。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "evidence_file": "02_三家供应商报价与TCO测算.xlsx"
+        },
+        {
+          "text": "三家比价对象均为750mL双淋膜产品。",
+          "should_flag": true,
+          "expected_status": "partial",
+          "accepted_statuses": [
+            "partial",
+            "conflict"
+          ],
+          "evidence_file": "05_供应商B报价单_扫描.pdf"
+        },
+        {
+          "text": "供应商B的750mL产品最小起订量为10万件。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "05_供应商B报价单_扫描.pdf"
+        },
+        {
+          "text": "供应商B付款条件为30%预付、70%验收后30日支付。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "05_供应商B报价单_扫描.pdf"
+        },
+        {
+          "text": "总拥有成本测算已计入4万元制版费。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "02_三家供应商报价与TCO测算.xlsx"
+        },
+        {
+          "text": "供应商A准时交付率为93.2%。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "03_历史采购订单与履约KPI.xlsx"
+        },
+        {
+          "text": "供应商B准时交付率为96.8%。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "evidence_file": "03_历史采购订单与履约KPI.xlsx"
+        },
+        {
+          "text": "供应商C准时交付率为90.1%。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "03_历史采购订单与履约KPI.xlsx"
+        },
+        {
+          "text": "供应商B平均交付周期为10个自然日。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "evidence_file": "03_历史采购订单与履约KPI.xlsx"
+        },
+        {
+          "text": "供应商B在2026年4月发生过一次重大延期。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "14_客户投诉与8D整改记录.docx"
+        },
+        {
+          "text": "供应商B质量缺陷率为0.6%。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "evidence_file": "03_历史采购订单与履约KPI.xlsx"
+        },
+        {
+          "text": "供应商B质量表现为三家最佳。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "evidence_file": "03_历史采购订单与履约KPI.xlsx"
+        },
+        {
+          "text": "供应商B的5万件试单已验收。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "13_试单验收记录.xlsx"
+        },
+        {
+          "text": "供应商B投诉平均关闭时间为2.1天。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "14_客户投诉与8D整改记录.docx"
+        },
+        {
+          "text": "评估期内没有食品安全事件。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "14_客户投诉与8D整改记录.docx"
+        },
+        {
+          "text": "当前检测报告是最新有效报告。",
+          "should_flag": true,
+          "expected_status": "stale",
+          "accepted_statuses": [
+            "stale"
+          ],
+          "evidence_file": "07_供应商B产品检测报告_扫描.pdf"
+        },
+        {
+          "text": "检测报告样品与750mL双淋膜采购品一致。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict",
+            "partial"
+          ],
+          "evidence_file": "07_供应商B产品检测报告_扫描.pdf"
+        },
+        {
+          "text": "检测机构CMA范围覆盖该检测方法。",
+          "should_flag": true,
+          "expected_status": "needs_review",
+          "accepted_statuses": [
+            "needs_review"
+          ],
+          "evidence_file": "08_检测机构CMA能力附表_低清.tiff"
+        },
+        {
+          "text": "当前FSC证书有效至2027年。",
+          "should_flag": true,
+          "expected_status": "stale",
+          "accepted_statuses": [
+            "stale"
+          ],
+          "evidence_file": "09_供应商B提交的FSC证书.jpg"
+        },
+        {
+          "text": "FSC证书持有人就是供应商B合同主体博远包装有限公司。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "evidence_file": "09_供应商B提交的FSC证书.jpg"
+        },
+        {
+          "text": "供应商B的ISO 9001证书有效至2027年。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "10_供应商B_ISO9001证书.pdf"
+        },
+        {
+          "text": "供应商B注册资本为3000万元。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "11_供应商主体与关联关系说明.docx"
+        },
+        {
+          "text": "供应商B月产能为800万件并已独立核验。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict",
+            "partial"
+          ],
+          "evidence_file": "12_现场验厂纪要.docx"
+        },
+        {
+          "text": "经审计月产能为600万件。",
+          "should_flag": true,
+          "expected_status": "unsupported",
+          "accepted_statuses": [
+            "unsupported",
+            "conflict"
+          ],
+          "evidence_file": "12_现场验厂纪要.docx"
+        },
+        {
+          "text": "供应商B当前产能利用率为62%。",
+          "should_flag": true,
+          "expected_status": "unsupported",
+          "accepted_statuses": [
+            "unsupported",
+            "partial",
+            "conflict"
+          ],
+          "evidence_file": "12_现场验厂纪要.docx"
+        },
+        {
+          "text": "供应商B现场有两条备用产线。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "12_现场验厂纪要.docx"
+        },
+        {
+          "text": "供应商B对原材料供应商每年复审。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "12_现场验厂纪要.docx"
+        },
+        {
+          "text": "历史三批采购累计付款58.4万元。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "16a_银行电子回单.png"
+        },
+        {
+          "text": "三笔款项均支付给合同主体博远包装有限公司。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict",
+            "partial"
+          ],
+          "evidence_file": "16b_银行电子回单.png"
+        },
+        {
+          "text": "所有评审人员均提交利益冲突声明。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict",
+            "partial"
+          ],
+          "evidence_file": "17_采购评审会议纪要及利益冲突声明.docx"
+        },
+        {
+          "text": "70%与30%的份额分配足以控制断供风险。",
+          "should_flag": true,
+          "expected_status": "partial",
+          "accepted_statuses": [
+            "partial",
+            "conflict"
+          ],
+          "evidence_file": "17_采购评审会议纪要及利益冲突声明.docx"
+        },
+        {
+          "text": "供应商B可以无条件续签。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict",
+            "partial"
+          ],
+          "evidence_file": "01_审计口径与决策门槛.docx"
+        },
+        {
+          "text": "本次证据截止日为2026年6月30日。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "01_审计口径与决策门槛.docx"
+        },
+        {
+          "text": "报告只引用了截止日前收到的17组材料。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "evidence_file": "01_审计口径与决策门槛.docx"
+        }
+      ]
+    }
+  ]
+}

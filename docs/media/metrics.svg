@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#f5f8fa"/>
+  <text x="100" y="105" font-family="Arial, PingFang SC, sans-serif" font-size="54" font-weight="700" fill="#102a43">跨行业黄金集实测</text>
+  <text x="102" y="155" font-family="Arial, PingFang SC, sans-serif" font-size="25" fill="#557787">采购 · 运营 · 咨询｜脱敏重构并主动植入风险</text>
+  <g font-family="Arial, PingFang SC, sans-serif">
+    <g transform="translate(100 235)">
+      <rect width="420" height="210" rx="32" fill="#102a43"/>
+      <text x="210" y="88" text-anchor="middle" font-size="72" font-weight="700" fill="#fff">100</text>
+      <text x="210" y="142" text-anchor="middle" font-size="27" fill="#cbe9e9">报告结论</text>
+    </g>
+    <g transform="translate(590 235)">
+      <rect width="420" height="210" rx="32" fill="#1c4e5f"/>
+      <text x="210" y="88" text-anchor="middle" font-size="72" font-weight="700" fill="#fff">49</text>
+      <text x="210" y="142" text-anchor="middle" font-size="27" fill="#d9eff0">植入风险</text>
+    </g>
+    <g transform="translate(1080 235)">
+      <rect width="420" height="210" rx="32" fill="#18a39b"/>
+      <text x="210" y="88" text-anchor="middle" font-size="72" font-weight="700" fill="#fff">369</text>
+      <text x="210" y="142" text-anchor="middle" font-size="27" fill="#efffff">可定位证据片段</text>
+    </g>
+    <g transform="translate(100 515)">
+      <rect width="420" height="210" rx="32" fill="#fff" stroke="#c9d8df" stroke-width="3"/>
+      <text x="210" y="88" text-anchor="middle" font-size="64" font-weight="700" fill="#102a43">100%</text>
+      <text x="210" y="142" text-anchor="middle" font-size="25" fill="#557787">风险识别 Precision</text>
+    </g>
+    <g transform="translate(590 515)">
+      <rect width="420" height="210" rx="32" fill="#fff" stroke="#c9d8df" stroke-width="3"/>
+      <text x="210" y="88" text-anchor="middle" font-size="64" font-weight="700" fill="#102a43">97.96%</text>
+      <text x="210" y="142" text-anchor="middle" font-size="25" fill="#557787">风险识别 Recall</text>
+    </g>
+    <g transform="translate(1080 515)">
+      <rect width="420" height="210" rx="32" fill="#fff" stroke="#c9d8df" stroke-width="3"/>
+      <text x="210" y="88" text-anchor="middle" font-size="64" font-weight="700" fill="#102a43">91%</text>
+      <text x="210" y="142" text-anchor="middle" font-size="25" fill="#557787">严格证据 Top-5</text>
+    </g>
+    <text x="100" y="810" font-size="21" fill="#6b7f8b">指标来自可复现黄金案例，不等同于真实客户环境泛化表现。</text>
+  </g>
+</svg>

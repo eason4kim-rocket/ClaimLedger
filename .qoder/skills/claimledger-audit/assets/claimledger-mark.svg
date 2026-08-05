@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-labelledby="title">
+  <title id="title">ClaimLedger evidence audit mark</title>
+  <defs>
+    <linearGradient id="bg" x1="40" y1="30" x2="360" y2="370" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#102A43"/>
+      <stop offset="1" stop-color="#1C4E5F"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="92" fill="url(#bg)"/>
+  <path d="M101 78h147l52 52v192H101z" fill="#F7FBFC"/>
+  <path d="M248 78v54h52" fill="#CBE9E9"/>
+  <path d="M138 161h122M138 201h122M138 241h72" fill="none" stroke="#557787" stroke-width="15" stroke-linecap="round"/>
+  <circle cx="274" cy="275" r="68" fill="#18A39B" stroke="#F7FBFC" stroke-width="12"/>
+  <path d="m241 275 22 23 46-52" fill="none" stroke="#fff" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,35 @@
+name: operations-zh
+version: 2
+freshness_window_days: 365
+exclusive_categories:
+  - id: order-denominator
+    issue_code: scope_mismatch
+    values:
+      completed_orders: [完成订单, 已完成订单]
+      created_orders: [创建订单, 全部订单]
+      paid_orders: [支付订单, 已支付订单]
+  - id: time-window
+    issue_code: scope_mismatch
+    values:
+      monthly: [本月, 月度, 6月, 7月]
+      quarterly: [本季度, 二季度, 季度]
+  - id: metric-scope
+    issue_code: scope_mismatch
+    values:
+      regional: [区域仓, 华南仓, 华东仓]
+      national: [全国仓, 全国网络]
+  - id: warehouse-region
+    issue_code: scope_mismatch
+    values:
+      national: [全国仓, 全国网络, 全国加权]
+      east: [华东仓, 华东区域]
+      south: [华南仓, 华南区域]
+      north: [华北仓, 华北区域]
+      west: [西部仓, 西部区域]
+source_authority:
+  - level: primary
+    patterns: [系统导出, 生命周期导出, 财务结算, 运费结算, 异常RCA, 货运保险, SLA]
+  - level: derived
+    patterns: [运营月报, KPI, 统计, 台账]
+  - level: self_reported
+    patterns: [承运商说明, 自述]

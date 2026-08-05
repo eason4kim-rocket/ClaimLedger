@@ -1,0 +1,33 @@
+name: procurement-zh
+version: 1
+freshness_window_days: 365
+ocr:
+  review_below: 0.90
+exclusive_categories:
+  - id: freight-basis
+    issue_code: scope_mismatch
+    values:
+      freight_included: [含运, 含运费, 包含运费, 运费已含, 已含]
+      freight_excluded: [不含运, 运费另计, 另加运费, 另计]
+  - id: package-volume
+    issue_code: scope_mismatch
+    values:
+      ml650: [650mL, 650ml, 650毫升]
+      ml750: [750mL, 750ml, 750毫升]
+  - id: coating-spec
+    issue_code: scope_mismatch
+    values:
+      single_coated: [单淋膜, 单面淋膜]
+      double_coated: [双淋膜, 双面淋膜]
+  - id: supplier-entity
+    issue_code: entity_mismatch
+    values:
+      anhe: [安禾包装, 安禾包装有限公司, 供应商A]
+      boyuan_contract: [博远包装, 博远包装有限公司, 供应商B, 合同主体]
+      boyuan_related: [博远供应链, 博远供应链有限公司, 关联公司]
+      chengxin: [诚新包装, 诚新包装有限公司, 供应商C]
+source_authority:
+  - level: primary
+    patterns: [银行电子回单, 框架合同, 试单验收, 履约KPI, CMA, ISO, FSC]
+  - level: self_reported
+    patterns: [报价单, 主体与关联关系说明, 现场验厂纪要]

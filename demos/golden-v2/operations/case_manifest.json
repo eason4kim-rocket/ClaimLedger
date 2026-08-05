@@ -1,0 +1,11 @@
+{
+  "case_id": "CL-OPS-001",
+  "title": "全国电商履约运营月报证据审计",
+  "disclosure": "公开问题原型驱动、脱敏重构的可复现实战案例｜非真实客户文件",
+  "claims": 28,
+  "planted_risks": 12,
+  "evidence_groups": 9,
+  "report": "report.docx",
+  "sources": "evidence",
+  "labels": "labels.json"
+}

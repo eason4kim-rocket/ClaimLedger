@@ -1,0 +1,442 @@
+{
+  "name": "claimledger-operations-golden-v1",
+  "disclosure": "公开问题原型驱动、脱敏重构的可复现实战案例｜非真实客户文件",
+  "cases": [
+    {
+      "name": "operations-fulfillment-monthly",
+      "report": "report.docx",
+      "sources": "evidence",
+      "profile": "deterministic",
+      "rule_pack": "operations-zh",
+      "as_of_date": "2026-08-05",
+      "claims": [
+        {
+          "text": "报告统计期间为2026年7月1日至2026年7月31日。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "01_运营口径与证据截点.docx",
+          "evidence_quote": "报告统计期间为2026年7月1日至2026年7月31日，证据截止日为2026年8月5日。",
+          "evidence_locator": "paragraph 3"
+        },
+        {
+          "text": "7月共创建订单15420单。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "02_订单生命周期导出.xlsx",
+          "evidence_quote": "创建订单(单): 15420",
+          "evidence_locator": "订单概览!B3"
+        },
+        {
+          "text": "7月完成订单14880单。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "02_订单生命周期导出.xlsx",
+          "evidence_quote": "完成订单(单): 14880",
+          "evidence_locator": "订单概览!C3"
+        },
+        {
+          "text": "7月支付订单14600单。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "02_订单生命周期导出.xlsx",
+          "evidence_quote": "支付订单(单): 14600",
+          "evidence_locator": "订单概览!D3"
+        },
+        {
+          "text": "7月订单完成率为96.5%。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "02_订单生命周期导出.xlsx",
+          "evidence_quote": "订单完成率: 0.965",
+          "evidence_locator": "订单概览!E3"
+        },
+        {
+          "text": "7月完成订单环比增长6.3%。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "02_订单生命周期导出.xlsx",
+          "evidence_quote": "完成订单环比: 0.063",
+          "evidence_locator": "订单概览!F3"
+        },
+        {
+          "text": "7月完成订单同比增长18.0%。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "numeric_mismatch"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "02_订单生命周期导出.xlsx",
+          "evidence_quote": "完成订单同比: 0.127",
+          "evidence_locator": "订单概览!G3"
+        },
+        {
+          "text": "7月全国仓准时交付率为96.4%。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "03_区域履约KPI.xlsx",
+          "evidence_quote": "准时交付率: 0.964",
+          "evidence_locator": "区域履约!B2"
+        },
+        {
+          "text": "7月华东仓准时交付率为96.4%。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "numeric_mismatch",
+            "scope_mismatch"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "03_区域履约KPI.xlsx",
+          "evidence_quote": "准时交付率: 0.941",
+          "evidence_locator": "区域履约!B3"
+        },
+        {
+          "text": "7月华南仓准时交付率为97.2%。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "03_区域履约KPI.xlsx",
+          "evidence_quote": "准时交付率: 0.972",
+          "evidence_locator": "区域履约!B4"
+        },
+        {
+          "text": "7月全国平均交付周期为2.8个自然日。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "03_区域履约KPI.xlsx",
+          "evidence_quote": "平均交付周期(个自然日): 2.8",
+          "evidence_locator": "区域履约!C2"
+        },
+        {
+          "text": "7月平均交付周期环比下降30%。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "numeric_mismatch"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "03_区域履约KPI.xlsx",
+          "evidence_quote": "环比下降率: 0.176",
+          "evidence_locator": "交付趋势!C3"
+        },
+        {
+          "text": "7月所有区域仓平均交付周期均低于3个自然日。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict",
+            "partial"
+          ],
+          "expected_issue_codes": [
+            "qualifier_overreach",
+            "numeric_mismatch"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "03_区域履约KPI.xlsx",
+          "evidence_quote": "平均交付周期(个自然日): 3.6",
+          "evidence_locator": "区域履约!C6"
+        },
+        {
+          "text": "7月投诉率按完成订单口径计算为0.42%。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "scope_mismatch"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "04_投诉与退货统计.xlsx",
+          "evidence_quote": "投诉率分母: 支付订单14600单",
+          "evidence_locator": "投诉退货!D3"
+        },
+        {
+          "text": "7月退货订单率为1.8%。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "04_投诉与退货统计.xlsx",
+          "evidence_quote": "退货订单率: 0.018",
+          "evidence_locator": "投诉退货!F3"
+        },
+        {
+          "text": "7月退货订单率环比下降0.4个百分点。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "numeric_mismatch"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "04_投诉与退货统计.xlsx",
+          "evidence_quote": "退货率环比下降: 0.2个百分点",
+          "evidence_locator": "投诉退货!G3"
+        },
+        {
+          "text": "7月缺货SKU共37个。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "05_库存与产能台账.xlsx",
+          "evidence_quote": "缺货SKU(个): 37",
+          "evidence_locator": "缺货SKU!B3"
+        },
+        {
+          "text": "7月缺货SKU环比下降25%。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "numeric_mismatch"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "05_库存与产能台账.xlsx",
+          "evidence_quote": "环比下降率: 0.119",
+          "evidence_locator": "缺货SKU!C3"
+        },
+        {
+          "text": "7月全国仓库存准确率为99.2%。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "05_库存与产能台账.xlsx",
+          "evidence_quote": "库存准确率: 0.992",
+          "evidence_locator": "库存准确率!B2"
+        },
+        {
+          "text": "7月所有仓库库存准确率均不低于99%。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict",
+            "partial"
+          ],
+          "expected_issue_codes": [
+            "qualifier_overreach",
+            "numeric_mismatch"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "05_库存与产能台账.xlsx",
+          "evidence_quote": "库存准确率: 0.978",
+          "evidence_locator": "库存准确率!B6"
+        },
+        {
+          "text": "7月承运商S在24小时内提货达成率为99.1%。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "06_承运商SLA与提货记录.pdf",
+          "evidence_quote": "承运商S在24小时内提货达成率为99.1%。",
+          "evidence_locator": "page 1 · bbox"
+        },
+        {
+          "text": "7月承运商S没有发生重大履约异常。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "qualifier_overreach"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "07_重大履约异常RCA.docx",
+          "evidence_quote": "2026年7月18日，承运商S发生1次重大履约异常，造成华东仓96票订单延迟。",
+          "evidence_locator": "paragraph 3"
+        },
+        {
+          "text": "7月运费支出为186万元。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "08_运费结算与单位成本.xlsx",
+          "evidence_quote": "运费支出(万元): 186",
+          "evidence_locator": "运费结算!B3"
+        },
+        {
+          "text": "7月每完成订单运费为125元。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "08_运费结算与单位成本.xlsx",
+          "evidence_quote": "每完成订单运费(元): 125",
+          "evidence_locator": "运费结算!C3"
+        },
+        {
+          "text": "7月运费支出环比下降8%。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "numeric_mismatch"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "08_运费结算与单位成本.xlsx",
+          "evidence_quote": "环比变化率: 0.057",
+          "evidence_locator": "运费结算!D3"
+        },
+        {
+          "text": "7月华东仓产能利用率为82%。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "05_库存与产能台账.xlsx",
+          "evidence_quote": "产能利用率: 0.82",
+          "evidence_locator": "产能利用!B3"
+        },
+        {
+          "text": "7月全国仓产能利用率为82%。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "scope_mismatch",
+            "numeric_mismatch"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "05_库存与产能台账.xlsx",
+          "evidence_quote": "产能利用率: 0.74",
+          "evidence_locator": "产能利用!B2"
+        },
+        {
+          "text": "截至目前，承运商S货运保险仍然有效。",
+          "should_flag": true,
+          "expected_status": "stale",
+          "accepted_statuses": [
+            "stale"
+          ],
+          "expected_issue_codes": [
+            "stale_evidence"
+          ],
+          "expected_severity": "medium",
+          "evidence_file": "09_承运商货运保险.pdf",
+          "evidence_quote": "有效期至2026年6月30日，期满后未提供续保凭证。",
+          "evidence_locator": "page 1 · bbox"
+        }
+      ]
+    }
+  ]
+}

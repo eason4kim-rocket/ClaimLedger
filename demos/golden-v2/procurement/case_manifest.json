@@ -1,0 +1,11 @@
+{
+  "case_id": "CL-PROC-001",
+  "title": "食品包装供应商续签决策报告证据审计",
+  "disclosure": "公开问题原型驱动、脱敏重构的可复现实战案例｜非真实客户文件",
+  "claims": 44,
+  "planted_risks": 23,
+  "evidence_groups": 17,
+  "report": "report.docx",
+  "sources": "evidence",
+  "labels": "labels.json"
+}

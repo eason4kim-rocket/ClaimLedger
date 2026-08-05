@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#f5f8fa"/>
+  <text x="100" y="110" font-family="Arial, PingFang SC, sans-serif" font-size="54" font-weight="700" fill="#102a43">从 AI 成稿到可信交付</text>
+  <text x="102" y="160" font-family="Arial, PingFang SC, sans-serif" font-size="25" fill="#557787">ClaimLedger 本地证据审计闭环</text>
+  <g font-family="Arial, PingFang SC, sans-serif">
+    <g transform="translate(100 245)">
+      <rect width="260" height="150" rx="28" fill="#102a43"/>
+      <text x="130" y="64" text-anchor="middle" font-size="31" font-weight="700" fill="#fff">Qoder 调用</text>
+      <text x="130" y="105" text-anchor="middle" font-size="21" fill="#cbe9e9">一句自然语言</text>
+    </g>
+    <path d="M380 320h70" stroke="#18a39b" stroke-width="8"/><path d="m438 300 28 20-28 20" fill="#18a39b"/>
+    <g transform="translate(470 245)">
+      <rect width="260" height="150" rx="28" fill="#1c4e5f"/>
+      <text x="130" y="64" text-anchor="middle" font-size="31" font-weight="700" fill="#fff">本地解析</text>
+      <text x="130" y="105" text-anchor="middle" font-size="21" fill="#d9eff0">Word / Excel / PDF / 图片</text>
+    </g>
+    <path d="M750 320h70" stroke="#18a39b" stroke-width="8"/><path d="m808 300 28 20-28 20" fill="#18a39b"/>
+    <g transform="translate(840 245)">
+      <rect width="260" height="150" rx="28" fill="#1c4e5f"/>
+      <text x="130" y="64" text-anchor="middle" font-size="31" font-weight="700" fill="#fff">证据核对</text>
+      <text x="130" y="105" text-anchor="middle" font-size="21" fill="#d9eff0">数字 / 日期 / 主体 / 口径</text>
+    </g>
+    <path d="M1120 320h70" stroke="#18a39b" stroke-width="8"/><path d="m1178 300 28 20-28 20" fill="#18a39b"/>
+    <g transform="translate(1210 245)">
+      <rect width="260" height="150" rx="28" fill="#18a39b"/>
+      <text x="130" y="64" text-anchor="middle" font-size="31" font-weight="700" fill="#fff">人工复核</text>
+      <text x="130" y="105" text-anchor="middle" font-size="21" fill="#efffff">接受 / 驳回 / 替换 / 豁免</text>
+    </g>
+    <path d="M1340 415v78H800v55" fill="none" stroke="#18a39b" stroke-width="8"/>
+    <path d="m780 535 20 28 20-28" fill="#18a39b"/>
+    <g transform="translate(460 575)">
+      <rect width="680" height="190" rx="34" fill="#fff" stroke="#c9d8df" stroke-width="3"/>
+      <text x="340" y="62" text-anchor="middle" font-size="34" font-weight="700" fill="#102a43">可信交付包</text>
+      <text x="340" y="112" text-anchor="middle" font-size="23" fill="#557787">Word 批注报告 · Excel 证据台账 · 审计 JSON</text>
+      <text x="340" y="150" text-anchor="middle" font-size="23" fill="#557787">哈希清单 · 人工确认后的最终新稿</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+{
+  "suite_id": "CL-GOLDEN-V2",
+  "title": "ClaimLedger 跨行业报告证据审计黄金集",
+  "disclosure": "公开问题原型驱动、脱敏重构的可复现实战案例｜非真实客户文件",
+  "industries": [
+    "采购决策",
+    "运营管理",
+    "咨询研究"
+  ],
+  "claims": 100,
+  "planted_risks": 49,
+  "evidence_groups": 36,
+  "case_ids": [
+    "CL-PROC-001",
+    "CL-OPS-001",
+    "CL-CONS-001"
+  ],
+  "labels": "labels.json"
+}

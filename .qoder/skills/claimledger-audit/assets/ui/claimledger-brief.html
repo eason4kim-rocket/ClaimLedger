@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ClaimLedger 可信交付台</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --navy: #0b1f33;
+      --navy-soft: #17324d;
+      --teal: #0e9488;
+      --teal-soft: #d9f3ef;
+      --amber: #d99213;
+      --red: #c43d4f;
+      --surface: #f7fafc;
+      --panel: #ffffff;
+      --line: #dce5ec;
+      --text: #152536;
+      --muted: #607184;
+      --shadow: 0 16px 40px rgba(11, 31, 51, .10);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --navy: #d9e8f5;
+        --navy-soft: #a9c3d9;
+        --teal: #35c4b5;
+        --teal-soft: #123d3b;
+        --amber: #f4b64b;
+        --red: #ff7888;
+        --surface: #0f171f;
+        --panel: #16212b;
+        --line: #2c3c4b;
+        --text: #edf4fa;
+        --muted: #a9b7c3;
+        --shadow: 0 16px 40px rgba(0, 0, 0, .28);
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--surface);
+      color: var(--text);
+      font: 14px/1.55 -apple-system, BlinkMacSystemFont, "PingFang SC",
+        "Microsoft YaHei", sans-serif;
+    }
+    .desk {
+      width: min(960px, 100%);
+      margin: 0 auto;
+      padding: 18px;
+    }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 22px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #0b1f33 0%, #123953 72%, #0d716c 140%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      right: -80px;
+      top: -105px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50%;
+    }
+    .eyebrow { opacity: .74; font-size: 12px; letter-spacing: .12em; }
+    h1 { margin: 5px 0 4px; font-size: 24px; line-height: 1.25; }
+    .sub { color: rgba(255,255,255,.74); }
+    .offline {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      float: right;
+      padding: 6px 10px;
+      border-radius: 99px;
+      background: rgba(255,255,255,.10);
+      font-size: 12px;
+    }
+    .offline::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #43ddc6;
+      box-shadow: 0 0 0 4px rgba(67,221,198,.14);
+    }
+    .stages {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .stage {
+      padding: 9px 11px;
+      border-radius: 9px;
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.64);
+      font-size: 12px;
+    }
+    .stage.done { background: rgba(53,196,181,.19); color: #d7fff9; }
+    .stage.active { background: #fff; color: #12324b; font-weight: 700; }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 14px 0;
+    }
+    .metric, .finding, .empty {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+    .metric { padding: 14px; }
+    .metric strong { display: block; color: var(--navy); font-size: 25px; line-height: 1.2; }
+    .metric span { color: var(--muted); font-size: 12px; }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 18px 2px 9px;
+    }
+    .section-head h2 { margin: 0; font-size: 16px; }
+    .section-head span { color: var(--muted); font-size: 12px; }
+    .findings { display: grid; gap: 10px; }
+    .finding { padding: 16px; }
+    .finding-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .badge {
+      display: inline-flex;
+      padding: 3px 8px;
+      border-radius: 99px;
+      background: color-mix(in srgb, var(--red) 13%, transparent);
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .badge.resolved { background: var(--teal-soft); color: var(--teal); }
+    .finding h3 { margin: 0 0 8px; font-size: 15px; }
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+    }
+    .quote {
+      padding: 10px;
+      border-radius: 9px;
+      background: color-mix(in srgb, var(--surface) 78%, var(--panel));
+    }
+    .quote b { display: block; margin-bottom: 4px; color: var(--muted); font-size: 11px; }
+    .difference {
+      margin: 9px 0 0;
+      padding-left: 10px;
+      border-left: 3px solid var(--amber);
+      color: var(--muted);
+    }
+    .location { margin-top: 5px; color: var(--muted); font-size: 11px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+    button {
+      appearance: none;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--text);
+      padding: 7px 10px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+    }
+    button:hover { border-color: var(--teal); color: var(--teal); }
+    button.primary { border-color: var(--teal); background: var(--teal); color: #fff; }
+    button.danger { color: var(--red); }
+    button:disabled { opacity: .42; cursor: not-allowed; }
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 14px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--panel);
+    }
+    .footer p { margin: 0; }
+    .footer small { display: block; color: var(--muted); }
+    .empty { padding: 28px; text-align: center; color: var(--muted); }
+    @media (max-width: 680px) {
+      .desk { padding: 10px; }
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+      .compare { grid-template-columns: 1fr; }
+      .stages { grid-template-columns: 1fr; }
+      .footer { align-items: stretch; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <main class="desk">
+    <section class="hero">
+      <span class="offline">本地离线</span>
+      <div class="eyebrow">CLAIMLEDGER · 可信交付台</div>
+      <h1 id="case-name">等待审计简报</h1>
+      <div class="sub" id="report-meta">数据由本地命令注入，不在组件中保存材料或令牌。</div>
+      <div class="stages">
+        <div class="stage" data-stage="automatic_audit">1　自动审计</div>
+        <div class="stage" data-stage="human_review">2　人工复核</div>
+        <div class="stage" data-stage="trusted_delivery">3　可信交付</div>
+      </div>
+    </section>
+
+    <section class="metrics" aria-label="审计指标">
+      <div class="metric"><strong id="metric-total">—</strong><span>候选发现</span></div>
+      <div class="metric"><strong id="metric-risk">—</strong><span>风险发现</span></div>
+      <div class="metric"><strong id="metric-block">—</strong><span>未处理高风险</span></div>
+      <div class="metric"><strong id="metric-decisions">—</strong><span>人工决定</span></div>
+    </section>
+
+    <div class="section-head">
+      <h2>优先处理</h2>
+      <span id="coverage">证据覆盖状态：—</span>
+    </div>
+    <section class="findings" id="findings"></section>
+
+    <section class="footer">
+      <p>
+        <strong id="next-step">请先运行本地审计。</strong>
+        <small>专业决定必须复述影响并取得明确确认，卡片不会直接提交。</small>
+      </p>
+      <div class="actions">
+        <button id="review-high">先处理高风险</button>
+        <button class="primary" id="export" disabled>生成最终交付包</button>
+      </div>
+    </section>
+  </main>
+
+  <script id="claimledger-brief-data" type="application/json">{"schema_version":"claimledger-brief-v1","empty":true}</script>
+  <script>
+    (() => {
+      const embedded = JSON.parse(document.getElementById("claimledger-brief-data").textContent);
+      const injected = window.__WIDGET_DATA__;
+      const data = window.CLAIMLEDGER_BRIEF
+        || (injected && typeof injected === "object" && injected.brief
+          ? injected.brief
+          : injected)
+        || embedded;
+      const byId = (id) => document.getElementById(id);
+      const clean = (value) => String(value ?? "");
+      const send = (message) => {
+        if (window.sendToAgent) {
+          window.sendToAgent(message, { submit: true });
+          return;
+        }
+        navigator.clipboard?.writeText(message);
+      };
+      const intent = (finding, action) => {
+        const prefix = `请处理任务 ${clean(data.job_id)} 的发现 ${clean(finding.finding_id)}：`;
+        const messages = {
+          evidence: `${prefix}查看证据。请解释报告原结论、证据内容、具体差异和证据位置。`,
+          explain: `${prefix}解释本条。请用通俗中文说明风险和建议动作，不要直接提交决定。`,
+          replace: `${prefix}按建议修改。请先复述修改前后文本、依据和影响，并等待我明确确认。`,
+          reject: `${prefix}标记误报。请先复述驳回理由和交付影响，并等待我明确确认。`,
+          waive: `${prefix}正式豁免。请先说明责任人、期限和风险影响，并等待我明确确认。`
+        };
+        send(messages[action]);
+      };
+      const textNode = (tag, className, value) => {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        node.textContent = clean(value);
+        return node;
+      };
+      const button = (label, action, finding, className = "") => {
+        const node = textNode("button", className, label);
+        node.type = "button";
+        node.addEventListener("click", () => intent(finding, action));
+        return node;
+      };
+
+      if (data.empty || !data.job_id) {
+        byId("findings").append(textNode(
+          "div",
+          "empty",
+          "这里将显示本地审计后的中文简报。组件本身不读取数据库、模型或私有文件。"
+        ));
+        return;
+      }
+
+      byId("case-name").textContent = clean(data.case_name || "报告证据审计");
+      byId("report-meta").textContent =
+        `${clean(data.report_name)} · ${clean(data.rule_pack)} · 任务 ${clean(data.job_id)}`;
+      byId("coverage").textContent = `证据覆盖状态：${clean(data.coverage_label)}`;
+      byId("metric-total").textContent = clean(data.summary.candidate_findings);
+      byId("metric-risk").textContent = clean(data.summary.risk_findings);
+      byId("metric-block").textContent = clean(data.summary.unresolved_high);
+      byId("metric-decisions").textContent = clean(data.summary.human_decisions);
+      byId("next-step").textContent = clean(data.next_step);
+
+      const order = ["automatic_audit", "human_review", "trusted_delivery"];
+      const current = Math.max(0, order.indexOf(data.phase));
+      document.querySelectorAll(".stage").forEach((node, index) => {
+        node.classList.toggle("done", index < current);
+        node.classList.toggle("active", index === current);
+      });
+
+      const list = byId("findings");
+      (data.top_findings || []).forEach((finding, index) => {
+        const card = document.createElement("article");
+        card.className = "finding";
+        card.id = `brief-${clean(finding.finding_id)}`;
+        const head = document.createElement("div");
+        head.className = "finding-head";
+        head.append(textNode("strong", "", `#${index + 1} · ${clean(finding.severity_label)}`));
+        head.append(textNode(
+          "span",
+          `badge${finding.resolved ? " resolved" : ""}`,
+          finding.resolved ? "已处理" : clean(finding.status_label)
+        ));
+        card.append(head);
+        card.append(textNode("h3", "", clean(finding.claim)));
+
+        const compare = document.createElement("div");
+        compare.className = "compare";
+        const report = document.createElement("div");
+        report.className = "quote";
+        report.append(textNode("b", "", "报告原结论"));
+        report.append(textNode("span", "", clean(finding.claim)));
+        report.append(textNode("div", "location", clean(finding.report_location)));
+        const evidence = document.createElement("div");
+        evidence.className = "quote";
+        evidence.append(textNode("b", "", "最相关证据"));
+        evidence.append(textNode("span", "", clean(finding.evidence_summary)));
+        evidence.append(textNode("div", "location", clean(finding.evidence_location)));
+        compare.append(report, evidence);
+        card.append(compare);
+        card.append(textNode("div", "difference", clean(finding.difference)));
+
+        const actions = document.createElement("div");
+        actions.className = "actions";
+        actions.append(
+          button("查看证据", "evidence", finding),
+          button("解释本条", "explain", finding),
+          button("按建议修改", "replace", finding, "primary"),
+          button("标记误报", "reject", finding),
+          button("正式豁免", "waive", finding, "danger")
+        );
+        card.append(actions);
+        list.append(card);
+      });
+
+      byId("review-high").addEventListener("click", () => {
+        send(`请继续处理任务 ${clean(data.job_id)}：先按优先级解释未解决的高风险发现，每次专业决定都先复述并等待我确认。`);
+      });
+      const exportButton = byId("export");
+      exportButton.disabled = !data.final_export_available;
+      exportButton.addEventListener("click", () => {
+        send(`请为任务 ${clean(data.job_id)} 生成最终交付包，并用中文说明五个文件分别用于什么。`);
+      });
+    })();
+  </script>
+</body>
+</html>

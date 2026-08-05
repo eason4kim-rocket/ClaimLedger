@@ -1,0 +1,42 @@
+name: consulting-zh
+version: 2
+freshness_window_days: 365
+exclusive_categories:
+  - id: research-scope
+    issue_code: scope_mismatch
+    values:
+      national: [全国市场, 全国口径]
+      regional: [区域市场, 华东市场, 华南市场]
+  - id: evidence-maturity
+    issue_code: qualifier_overreach
+    values:
+      preliminary: [初步, 试点, 样本内]
+      final: [最终, 全面, 全部计划, 全部制造企业, 普遍适用]
+  - id: scenario-type
+    issue_code: scope_mismatch
+    values:
+      base: [基准情景, 基准预测]
+      optimistic: [乐观情景, 上行情景]
+      conservative: [保守情景, 下行情景]
+  - id: market-boundary
+    issue_code: scope_mismatch
+    values:
+      full_stack: [全栈市场, 软件和系统集成, 一体化解决方案]
+      hardware_only: [硬件市场, 仅硬件, 视觉相机和边缘计算设备]
+  - id: customer-scope
+    issue_code: scope_mismatch
+    values:
+      sample: [受访客户, 访谈样本, 样本内, 试点客户]
+      population: [全部客户, 所有客户, 全部制造企业, 全国客户]
+  - id: policy-strength
+    issue_code: qualifier_overreach
+    values:
+      encouragement: [鼓励, 支持试点, 开展试点]
+      mandate: [要求所有, 强制, 普遍部署义务, 必须部署]
+source_authority:
+  - level: primary
+    patterns: [政策原文, 年报, 经审计, 项目评审纪要]
+  - level: derived
+    patterns: [市场规模, 情景模型, 研究报告]
+  - level: self_reported
+    patterns: [访谈, 价格清单]

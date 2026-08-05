@@ -1,0 +1,16 @@
+profiles:
+  deterministic:
+    generation: null
+    embeddings: lexical
+    reranker: lexical
+  lite:
+    generation: null
+    embeddings: lexical
+    reranker: lexical
+    ocr: PP-OCRv5-mobile
+    device: CPU
+  balanced:
+    generation: OpenVINO/Qwen3-8B-int4-ov
+    embeddings: OpenVINO/Qwen3-Embedding-0.6B-fp16-ov
+    reranker: OpenVINO/Qwen3-Reranker-0.6B-seq-cls-fp16-ov
+    device: AUTO:GPU,CPU

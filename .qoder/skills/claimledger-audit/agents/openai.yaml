@@ -1,0 +1,7 @@
+interface:
+  display_name: "ClaimLedger 报告证据审计"
+  short_description: "AI 成稿后的本地证据核证与可信交付"
+  icon_small: "./assets/claimledger-icon-1024.png"
+  icon_large: "./assets/claimledger-icon-1024.png"
+  brand_color: "#18A39B"
+  default_prompt: "使用 $claimledger-audit 和默认 Lite 模式，根据我的本地证据文件夹审计这份 DOCX 报告。完成后请显示中文可信交付台，解释最重要的候选发现，并询问是否继续处理。"

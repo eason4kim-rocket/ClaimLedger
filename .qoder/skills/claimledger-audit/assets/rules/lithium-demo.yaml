@@ -1,0 +1,16 @@
+name: lithium-demo
+version: 1
+exclusive_categories:
+  - id: lithium-product
+    values:
+      carbonate: [碳酸锂, Li2CO3]
+      hydroxide: [氢氧化锂, LiOH]
+  - id: feedstock-grade
+    values:
+      spodumene_sc6: [SC6, 6%锂辉石, 锂辉石精矿]
+      mica: [锂云母, 云母精矿]
+  - id: freight-scope
+    values:
+      route: [澳洲至中国, 非洲至中国, 进口路线, 航线运价]
+      global: [全球航运指数, 波罗的海指数, BDI]
+

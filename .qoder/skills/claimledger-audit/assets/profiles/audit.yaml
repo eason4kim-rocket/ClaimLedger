@@ -1,0 +1,10 @@
+name: audit
+kind: reviewer_memory_template
+execution_profile: null
+version: "1"
+default_filter: high
+severity_floor_by_issue:
+  missing_evidence: high
+  source_conflict: high
+  numeric_mismatch: high
+  locator_uncertainty: medium

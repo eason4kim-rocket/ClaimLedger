@@ -1,0 +1,58 @@
+{
+  "claimledger_version": "0.4.0",
+  "models_manifest": {
+    "path": ".qoder/skills/claimledger-audit/assets/models.yaml",
+    "sha256": "4c3727a0abd600606e99faffe643d32a813549c6a9707ca69b65afcadc9d25a2"
+  },
+  "balanced_models": [
+    {
+      "role": "generation",
+      "model_id": "OpenVINO/Qwen3-8B-int4-ov",
+      "snapshot_revision": "5c47abf4b8e12ebe8e99745bb0c1ec17e0c0abcc",
+      "installation_manifest_sha256": "ace4b8d843f18081914647118d468c42cab93efa9b85e4bbd08554945e8af12c"
+    },
+    {
+      "role": "embeddings",
+      "model_id": "OpenVINO/Qwen3-Embedding-0.6B-fp16-ov",
+      "snapshot_revision": "82a0035040926a5c0dcf251209218e096c5eeb1c",
+      "installation_manifest_sha256": "b871d387cffff112ba6f96436c261f3b2747ce1578c077af238a46dd8bf60e9c"
+    },
+    {
+      "role": "reranker",
+      "model_id": "OpenVINO/Qwen3-Reranker-0.6B-seq-cls-fp16-ov",
+      "snapshot_revision": "4b0e5e6594de720a793646c0af2cfd52f8a45fa6",
+      "installation_manifest_sha256": "a9155f2ef8ab52d3c42a816377690515ec7f73d01f00a76b57aaccde7270fbdc"
+    }
+  ],
+  "rules": [
+    {
+      "id": "consulting-zh",
+      "sha256": "f08483efa08eea3c0a40228e8fa48a21a8c846b9eba28d8e4690a996e7da588b"
+    },
+    {
+      "id": "generic-zh",
+      "sha256": "2072bbb4114a7ca442f8ae6de89fbf72d527a95e3d10695e5e23c4fbf9712376"
+    },
+    {
+      "id": "lithium-demo",
+      "sha256": "9819d3172af3700a8880fc5f60e17c62ae6380154985fad7de7452e922b54cd7"
+    },
+    {
+      "id": "operations-zh",
+      "sha256": "f77b9da0e8a809d9b7b435cb84e7a2944527a975c29c37250d8ae44da2ff99de"
+    },
+    {
+      "id": "procurement-zh",
+      "sha256": "324467db69f2864b3f644f014705860247b554c1826f36e02c92d87fff48f627"
+    }
+  ],
+  "golden_dataset": {
+    "labels_sha256": "8fc683874143cb2cd94b145ca2d1068cf4d0ba903ba4da6d854ccdaeacaccbb2",
+    "result_sha256": "afb4dc63d1373f37a8fb598050ce7a1c95aad8fe2235799dff37f493ca64393e"
+  },
+  "verification_scope": {
+    "lite": "Three complete 100-claim cases verified on Mac CPU.",
+    "balanced": "Three-claim end-to-end pipeline plus independent embedding and reranker inference verified on Mac OpenVINO CPU.",
+    "intel_gpu": "Not tested."
+  }
+}

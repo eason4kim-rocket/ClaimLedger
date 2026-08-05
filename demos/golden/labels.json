@@ -1,0 +1,89 @@
+{
+  "name": "claimledger-seed-golden-v1",
+  "cases": [
+    {
+      "name": "lithium",
+      "report": "../quickstart/report.docx",
+      "sources": "../quickstart/evidence",
+      "rule_pack": "lithium-demo",
+      "claims": [
+        {
+          "text": "截至目前，电池级碳酸锂价格为每吨 120000 元，较上月增长 15%。",
+          "should_flag": true,
+          "accepted_statuses": ["conflict"],
+          "evidence_file": "public-evidence.docx"
+        },
+        {
+          "text": "SC6 锂辉石与低品位锂云母可以直接按照吨价比较采购成本。",
+          "should_flag": true,
+          "accepted_statuses": ["conflict"],
+          "evidence_file": "public-evidence.docx"
+        },
+        {
+          "text": "全球航运指数下降表明澳洲至中国的锂矿进口路线运价下降 20%。",
+          "should_flag": true,
+          "accepted_statuses": ["conflict"],
+          "evidence_file": "public-evidence.docx"
+        },
+        {
+          "text": "2026年7月，电池级碳酸锂现货参考价为每吨 120000 元。",
+          "should_flag": false,
+          "accepted_statuses": ["supported"],
+          "evidence_file": "public-evidence.docx"
+        }
+      ]
+    },
+    {
+      "name": "operations",
+      "report": "../operations/report.docx",
+      "sources": "../operations/evidence",
+      "rule_pack": "generic-zh",
+      "claims": [
+        {
+          "text": "7月完成订单 1280 单，同比增长 18%。",
+          "should_flag": true,
+          "accepted_statuses": ["conflict"],
+          "evidence_file": "public-evidence.docx"
+        },
+        {
+          "text": "本月平均交付周期下降至 4.2 天，环比下降 30%。",
+          "should_flag": true,
+          "accepted_statuses": ["conflict"],
+          "evidence_file": "public-evidence.docx"
+        },
+        {
+          "text": "7月完成订单 1280 单。",
+          "should_flag": false,
+          "accepted_statuses": ["supported"],
+          "evidence_file": "public-evidence.docx"
+        }
+      ]
+    },
+    {
+      "name": "consulting",
+      "report": "../consulting/report.docx",
+      "sources": "../consulting/evidence",
+      "rule_pack": "generic-zh",
+      "claims": [
+        {
+          "text": "截至目前，目标市场规模达到 85 亿元，预计未来三年保持 25% 增长。",
+          "should_flag": true,
+          "accepted_statuses": ["conflict", "stale"],
+          "evidence_file": "public-evidence.docx"
+        },
+        {
+          "text": "主要客户均将价格视为唯一采购因素。",
+          "should_flag": true,
+          "accepted_statuses": ["partial", "conflict", "unsupported"],
+          "evidence_file": "public-evidence.docx"
+        },
+        {
+          "text": "2024年研究估算目标市场规模约为 62 亿元。",
+          "should_flag": false,
+          "accepted_statuses": ["supported"],
+          "evidence_file": "public-evidence.docx"
+        }
+      ]
+    }
+  ]
+}

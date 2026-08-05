@@ -1,0 +1,9 @@
+name: consulting
+kind: reviewer_memory_template
+execution_profile: null
+version: "1"
+default_filter: unresolved
+severity_floor_by_issue:
+  qualifier_overreach: high
+  source_conflict: high
+  stale_evidence: medium

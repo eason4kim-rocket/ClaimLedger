@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 320" role="img" aria-labelledby="title desc">
+  <title id="title">ClaimLedger</title>
+  <desc id="desc">Local evidence audit and trusted delivery</desc>
+  <rect width="1120" height="320" rx="42" fill="#F4F9FA"/>
+  <g transform="translate(42 32) scale(.64)">
+    <rect width="400" height="400" rx="92" fill="#102A43"/>
+    <path d="M101 78h147l52 52v192H101z" fill="#fff"/>
+    <path d="M248 78v54h52" fill="#CBE9E9"/>
+    <path d="M138 161h122M138 201h122M138 241h72" fill="none" stroke="#557787" stroke-width="15" stroke-linecap="round"/>
+    <circle cx="274" cy="275" r="68" fill="#18A39B" stroke="#fff" stroke-width="12"/>
+    <path d="m241 275 22 23 46-52" fill="none" stroke="#fff" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="340" y="142" fill="#102A43" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="700">ClaimLedger</text>
+  <text x="344" y="205" fill="#1C4E5F" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="600">LOCAL EVIDENCE AUDIT</text>
+  <text x="344" y="252" fill="#557787" font-family="Arial, Helvetica, sans-serif" font-size="25">From AI-written claim to defensible delivery</text>
+</svg>

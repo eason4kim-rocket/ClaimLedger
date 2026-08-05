@@ -1,0 +1,441 @@
+{
+  "name": "claimledger-consulting-golden-v1",
+  "disclosure": "公开问题原型驱动、脱敏重构的可复现实战案例｜非真实客户文件",
+  "cases": [
+    {
+      "name": "consulting-market-entry",
+      "report": "report.docx",
+      "sources": "evidence",
+      "profile": "deterministic",
+      "rule_pack": "consulting-zh",
+      "as_of_date": "2026-07-18",
+      "claims": [
+        {
+          "text": "研究期间为2026年1月1日至2026年6月30日。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "01_研究口径与情景选择.docx",
+          "evidence_quote": "研究期间为2026年1月1日至2026年6月30日，证据截止日为2026年7月18日。",
+          "evidence_locator": "paragraph 3"
+        },
+        {
+          "text": "本报告市场口径包含视觉相机、边缘计算、软件和系统集成。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "01_研究口径与情景选择.docx",
+          "evidence_quote": "本报告市场口径包含视觉相机、边缘计算、软件和系统集成，统称全国全栈市场。",
+          "evidence_locator": "paragraph 4"
+        },
+        {
+          "text": "2025年全国工业视觉质检市场规模达到85亿元。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "numeric_mismatch"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "02_市场规模与情景模型.xlsx",
+          "evidence_quote": "市场规模(亿元): 68",
+          "evidence_locator": "市场边界!D2"
+        },
+        {
+          "text": "2025年华东市场规模达到68亿元。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "scope_mismatch",
+            "numeric_mismatch"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "02_市场规模与情景模型.xlsx",
+          "evidence_quote": "市场规模(亿元): 24",
+          "evidence_locator": "市场边界!D3"
+        },
+        {
+          "text": "2025年硬件市场规模达到68亿元。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "scope_mismatch",
+            "numeric_mismatch"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "02_市场规模与情景模型.xlsx",
+          "evidence_quote": "市场规模(亿元): 31",
+          "evidence_locator": "市场边界!D4"
+        },
+        {
+          "text": "2025年全国全栈市场规模为68亿元。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "02_市场规模与情景模型.xlsx",
+          "evidence_quote": "市场规模(亿元): 68",
+          "evidence_locator": "市场边界!D2"
+        },
+        {
+          "text": "2026年基准情景市场规模为78.2亿元。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "02_市场规模与情景模型.xlsx",
+          "evidence_quote": "2026市场规模(亿元): 78.2",
+          "evidence_locator": "情景预测!C2"
+        },
+        {
+          "text": "基准情景2025年至2028年复合增长率为15%。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "02_市场规模与情景模型.xlsx",
+          "evidence_quote": "复合增长率: 0.15",
+          "evidence_locator": "情景预测!E2"
+        },
+        {
+          "text": "基准情景未来三年市场规模将保持25%的增长率。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "scope_mismatch",
+            "numeric_mismatch"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "02_市场规模与情景模型.xlsx",
+          "evidence_quote": "复合增长率: 0.15",
+          "evidence_locator": "情景预测!E2"
+        },
+        {
+          "text": "乐观情景2025年至2028年复合增长率为25%。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "02_市场规模与情景模型.xlsx",
+          "evidence_quote": "复合增长率: 0.25",
+          "evidence_locator": "情景预测!E3"
+        },
+        {
+          "text": "核心收入预计采用乐观情景。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "scope_mismatch"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "01_研究口径与情景选择.docx",
+          "evidence_quote": "核心收入预计采用基准情景，乐观情景只用于压力测试。",
+          "evidence_locator": "paragraph 5"
+        },
+        {
+          "text": "本轮访谈共覆盖24家企业。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "03_访谈样本与编码结果.xlsx",
+          "evidence_quote": "数量(家): 24",
+          "evidence_locator": "样本概览!B2"
+        },
+        {
+          "text": "访谈样本包含18家大型制造企业和6家中小企业。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "04_访谈方法与局限.docx",
+          "evidence_quote": "本轮访谈共覆盖24家企业，其中18家大型制造企业、6家中小企业。",
+          "evidence_locator": "paragraph 3"
+        },
+        {
+          "text": "所有受访客户均将价格视为唯一采购因素。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "qualifier_overreach"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "04_访谈方法与局限.docx",
+          "evidence_quote": "价格并非唯一采购因素，交付稳定性和售后能力也会影响采购决定。",
+          "evidence_locator": "paragraph 4"
+        },
+        {
+          "text": "24家样本中有15家将价格列入前三项采购因素。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "03_访谈样本与编码结果.xlsx",
+          "evidence_quote": "列入前三项数量(家): 15",
+          "evidence_locator": "采购因素!B2"
+        },
+        {
+          "text": "24家样本中有18家将交付稳定性列入前三项采购因素。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "03_访谈样本与编码结果.xlsx",
+          "evidence_quote": "列入前三项数量(家): 18",
+          "evidence_locator": "采购因素!B3"
+        },
+        {
+          "text": "交付稳定性进入前三项采购因素的样本占75%。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "03_访谈样本与编码结果.xlsx",
+          "evidence_quote": "样本占比: 0.75",
+          "evidence_locator": "采购因素!C3"
+        },
+        {
+          "text": "全部24家受访企业均计划在未来12个月采购。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "numeric_mismatch",
+            "qualifier_overreach"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "03_访谈样本与编码结果.xlsx",
+          "evidence_quote": "计划采购数量(家): 14",
+          "evidence_locator": "采购计划!B2"
+        },
+        {
+          "text": "计划在未来12个月采购的样本占58.3%。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "03_访谈样本与编码结果.xlsx",
+          "evidence_quote": "样本占比: 0.583",
+          "evidence_locator": "采购计划!D2"
+        },
+        {
+          "text": "本轮访谈可以代表全国市场需求。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "scope_mismatch"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "04_访谈方法与局限.docx",
+          "evidence_quote": "样本仅覆盖华东市场和华南市场，未做全国口径加权，不能代表全国市场需求。",
+          "evidence_locator": "paragraph 5"
+        },
+        {
+          "text": "6家试点客户的平均漏检率下降22%。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "05_六家试点结果.xlsx",
+          "evidence_quote": "平均漏检率下降: 0.22",
+          "evidence_locator": "试点结果!C2"
+        },
+        {
+          "text": "漏检率下降22%的结论适用于全部制造企业。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "qualifier_overreach"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "05_六家试点结果.xlsx",
+          "evidence_quote": "审计说明: 仅能解释6家试点样本内结果，不能适用于全部制造企业。",
+          "evidence_locator": "外推限制!B2"
+        },
+        {
+          "text": "6家试点客户的平均投资回收期为14个月。",
+          "should_flag": false,
+          "expected_status": "supported",
+          "accepted_statuses": [
+            "supported"
+          ],
+          "expected_issue_codes": [
+            "direct_support"
+          ],
+          "expected_severity": "low",
+          "evidence_file": "05_六家试点结果.xlsx",
+          "evidence_quote": "平均投资回收期(月): 14",
+          "evidence_locator": "试点结果!D2"
+        },
+        {
+          "text": "截至目前，竞品一体机成交价区间为35万元至80万元。",
+          "should_flag": true,
+          "expected_status": "stale",
+          "accepted_statuses": [
+            "stale"
+          ],
+          "expected_issue_codes": [
+            "stale_evidence"
+          ],
+          "expected_severity": "medium",
+          "evidence_file": "06_竞品价格清单_2024.pdf",
+          "evidence_quote": "样本内成交价区间为35万元至80万元。",
+          "evidence_locator": "page 1 · bbox"
+        },
+        {
+          "text": "竞争对手甲2025年相关业务收入为12亿元。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "numeric_mismatch"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "07_竞争对手甲年报摘录.pdf",
+          "evidence_quote": "2025年工业视觉质检相关业务收入为1.2亿元。",
+          "evidence_locator": "page 1 · bbox"
+        },
+        {
+          "text": "竞争对手乙在全国市场的份额为40%。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "scope_mismatch"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "08_竞争对手乙访谈摘要.docx",
+          "evidence_quote": "竞争对手乙在华东市场受访样本中的提及率为40%。",
+          "evidence_locator": "paragraph 3"
+        },
+        {
+          "text": "现行政策要求所有工厂在2027年前部署AI质检系统。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "qualifier_overreach"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "09_政策原文摘录.pdf",
+          "evidence_quote": "政策未要求所有工厂在2027年前完成部署，也未设置普遍部署义务。",
+          "evidence_locator": "page 1 · bbox"
+        },
+        {
+          "text": "项目可以无条件在全国全面商业化，无需补充验证。",
+          "should_flag": true,
+          "expected_status": "conflict",
+          "accepted_statuses": [
+            "conflict"
+          ],
+          "expected_issue_codes": [
+            "scope_mismatch",
+            "qualifier_overreach"
+          ],
+          "expected_severity": "high",
+          "evidence_file": "10_项目评审纪要.docx",
+          "evidence_quote": "当前证据不足以支持无条件全面商业化，客户行业分层和渠道成本仍需验证。",
+          "evidence_locator": "paragraph 4"
+        }
+      ]
+    }
+  ]
+}

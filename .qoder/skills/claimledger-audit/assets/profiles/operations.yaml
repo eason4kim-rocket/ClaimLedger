@@ -1,0 +1,10 @@
+name: operations
+kind: reviewer_memory_template
+execution_profile: null
+version: "1"
+default_filter: unresolved
+severity_floor_by_issue:
+  numeric_mismatch: high
+  unit_mismatch: high
+  date_mismatch: medium
+  derived_calculation: medium

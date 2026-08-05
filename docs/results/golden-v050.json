@@ -1,0 +1,722 @@
+{
+  "dataset": "claimledger-cross-industry-golden-v2",
+  "metrics": {
+    "claim_extraction_precision": 1.0,
+    "claim_extraction_recall": 1.0,
+    "claim_extraction_f1": 1.0,
+    "error_precision": 1.0,
+    "error_recall": 0.9796,
+    "error_f1": 0.9897,
+    "status_accuracy": 0.97,
+    "evidence_top5_recall": 0.91,
+    "high_risk_recall": 0.878,
+    "issue_code_micro_precision": 0.8317,
+    "issue_code_micro_recall": 0.7568,
+    "issue_code_micro_f1": 0.7925,
+    "issue_code_macro_f1": 0.8
+  },
+  "counts": {
+    "labeled_claims": 100,
+    "extracted_claims": 100,
+    "matched_predictions": 100,
+    "all_predictions": 100,
+    "true_positives": 48,
+    "false_positives": 0,
+    "false_negatives": 1,
+    "unlabeled_claims": 0,
+    "unlabeled_risk_predictions": 0,
+    "status_matches": 97,
+    "evidence_expected": 100,
+    "evidence_top5_hits": 91,
+    "high_risk_expected": 41,
+    "high_risk_hits": 36,
+    "issue_true_positives": 84,
+    "issue_false_positives": 17,
+    "issue_false_negatives": 27,
+    "issue_macro_f1_sum": 80.00040000000001,
+    "issue_macro_items": 100
+  },
+  "cases": [
+    {
+      "name": "procurement-renewal",
+      "coverage_status": "complete",
+      "stage_timings_ms": {
+        "preflight_and_snapshot": 15,
+        "parse_report": 29,
+        "parse_evidence": 33125,
+        "extract_claims": 3,
+        "retrieve_and_verify": 1389,
+        "total": 34576
+      },
+      "runtime_metrics": {
+        "peak_rss_bytes": 3373563904
+      },
+      "artifacts": {},
+      "unlabeled_claims": [],
+      "metrics": {
+        "claim_extraction_recall": 1.0,
+        "error_precision": 1.0,
+        "error_recall": 0.9565,
+        "error_f1": 0.9778,
+        "status_accuracy": 0.9318,
+        "evidence_top5_recall": 0.7955
+      },
+      "results": [
+        {
+          "text": "评估期间为2025年7月1日至2026年6月30日。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "年度需求为1200万个750mL双淋膜纸餐盒。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "年度预算为1080万元。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "采购委员会已批准供应商B占70%、供应商A占30%的正式份额。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "切换供应商B每年可节省168万元。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": false
+        },
+        {
+          "text": "供应商B的综合到岸成本最低。",
+          "expected_flag": true,
+          "predicted_status": "partial",
+          "evidence_top5_hit": false
+        },
+        {
+          "text": "三份报价均有效至2026年9月30日。",
+          "expected_flag": true,
+          "predicted_status": "partial",
+          "evidence_top5_hit": false
+        },
+        {
+          "text": "供应商A报价0.82元/个，含税含运。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "供应商B报价0.68元/个，含税。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "供应商C报价0.77元/个，含税含运。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "供应商B报价包含运费。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "三家比价对象均为750mL双淋膜产品。",
+          "expected_flag": true,
+          "predicted_status": "partial",
+          "evidence_top5_hit": false
+        },
+        {
+          "text": "供应商B的750mL产品最小起订量为10万件。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": false
+        },
+        {
+          "text": "供应商B付款条件为30%预付、70%验收后30日支付。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": false
+        },
+        {
+          "text": "总拥有成本测算已计入4万元制版费。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "供应商A准时交付率为93.2%。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "供应商B准时交付率为96.8%。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "供应商C准时交付率为90.1%。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "供应商B平均交付周期为10个自然日。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "供应商B在2026年4月发生过一次重大延期。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "供应商B质量缺陷率为0.6%。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "供应商B质量表现为三家最佳。",
+          "expected_flag": true,
+          "predicted_status": "partial",
+          "evidence_top5_hit": false
+        },
+        {
+          "text": "供应商B的5万件试单已验收。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "供应商B投诉平均关闭时间为2.1天。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "评估期内没有食品安全事件。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "当前检测报告是最新有效报告。",
+          "expected_flag": true,
+          "predicted_status": "stale",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "检测报告样品与750mL双淋膜采购品一致。",
+          "expected_flag": true,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "检测机构CMA范围覆盖该检测方法。",
+          "expected_flag": true,
+          "predicted_status": "needs_review",
+          "evidence_top5_hit": false
+        },
+        {
+          "text": "当前FSC证书有效至2027年。",
+          "expected_flag": true,
+          "predicted_status": "stale",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "FSC证书持有人就是供应商B合同主体博远包装有限公司。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "供应商B的ISO 9001证书有效至2027年。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "供应商B注册资本为3000万元。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "供应商B月产能为800万件并已独立核验。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "经审计月产能为600万件。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "供应商B当前产能利用率为62%。",
+          "expected_flag": true,
+          "predicted_status": "partial",
+          "evidence_top5_hit": false
+        },
+        {
+          "text": "供应商B现场有两条备用产线。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "供应商B对原材料供应商每年复审。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "历史三批采购累计付款58.4万元。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "三笔款项均支付给合同主体博远包装有限公司。",
+          "expected_flag": true,
+          "predicted_status": "partial",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "所有评审人员均提交利益冲突声明。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "70%与30%的份额分配足以控制断供风险。",
+          "expected_flag": true,
+          "predicted_status": "partial",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "供应商B可以无条件续签。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "本次证据截止日为2026年6月30日。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "报告只引用了截止日前收到的17组材料。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        }
+      ]
+    },
+    {
+      "name": "operations-fulfillment-monthly",
+      "coverage_status": "complete",
+      "stage_timings_ms": {
+        "preflight_and_snapshot": 7,
+        "parse_report": 23,
+        "parse_evidence": 73,
+        "extract_claims": 1,
+        "retrieve_and_verify": 612,
+        "total": 724
+      },
+      "runtime_metrics": {
+        "peak_rss_bytes": 3373563904
+      },
+      "artifacts": {},
+      "unlabeled_claims": [],
+      "metrics": {
+        "claim_extraction_recall": 1.0,
+        "error_precision": 1.0,
+        "error_recall": 1.0,
+        "error_f1": 1.0,
+        "status_accuracy": 1.0,
+        "evidence_top5_recall": 1.0
+      },
+      "results": [
+        {
+          "text": "报告统计期间为2026年7月1日至2026年7月31日。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月共创建订单15420单。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月完成订单14880单。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月支付订单14600单。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月订单完成率为96.5%。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月完成订单环比增长6.3%。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月完成订单同比增长18.0%。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月全国仓准时交付率为96.4%。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月华东仓准时交付率为96.4%。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月华南仓准时交付率为97.2%。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月全国平均交付周期为2.8个自然日。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月平均交付周期环比下降30%。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月所有区域仓平均交付周期均低于3个自然日。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月投诉率按完成订单口径计算为0.42%。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月退货订单率为1.8%。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月退货订单率环比下降0.4个百分点。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月缺货SKU共37个。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月缺货SKU环比下降25%。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月全国仓库存准确率为99.2%。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月所有仓库库存准确率均不低于99%。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月承运商S在24小时内提货达成率为99.1%。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月承运商S没有发生重大履约异常。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月运费支出为186万元。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月每完成订单运费为125元。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月运费支出环比下降8%。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月华东仓产能利用率为82%。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "7月全国仓产能利用率为82%。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "截至目前，承运商S货运保险仍然有效。",
+          "expected_flag": true,
+          "predicted_status": "stale",
+          "evidence_top5_hit": true
+        }
+      ]
+    },
+    {
+      "name": "consulting-market-entry",
+      "coverage_status": "complete",
+      "stage_timings_ms": {
+        "preflight_and_snapshot": 7,
+        "parse_report": 21,
+        "parse_evidence": 68,
+        "extract_claims": 1,
+        "retrieve_and_verify": 308,
+        "total": 412
+      },
+      "runtime_metrics": {
+        "peak_rss_bytes": 3373563904
+      },
+      "artifacts": {},
+      "unlabeled_claims": [],
+      "metrics": {
+        "claim_extraction_recall": 1.0,
+        "error_precision": 1.0,
+        "error_recall": 1.0,
+        "error_f1": 1.0,
+        "status_accuracy": 1.0,
+        "evidence_top5_recall": 1.0
+      },
+      "results": [
+        {
+          "text": "研究期间为2026年1月1日至2026年6月30日。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "本报告市场口径包含视觉相机、边缘计算、软件和系统集成。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "2025年全国工业视觉质检市场规模达到85亿元。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "2025年华东市场规模达到68亿元。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "2025年硬件市场规模达到68亿元。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "2025年全国全栈市场规模为68亿元。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "2026年基准情景市场规模为78.2亿元。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "基准情景2025年至2028年复合增长率为15%。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "基准情景未来三年市场规模将保持25%的增长率。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "乐观情景2025年至2028年复合增长率为25%。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "核心收入预计采用乐观情景。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "本轮访谈共覆盖24家企业。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "访谈样本包含18家大型制造企业和6家中小企业。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "所有受访客户均将价格视为唯一采购因素。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "24家样本中有15家将价格列入前三项采购因素。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "24家样本中有18家将交付稳定性列入前三项采购因素。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "交付稳定性进入前三项采购因素的样本占75%。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "全部24家受访企业均计划在未来12个月采购。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "计划在未来12个月采购的样本占58.3%。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "本轮访谈可以代表全国市场需求。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "6家试点客户的平均漏检率下降22%。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "漏检率下降22%的结论适用于全部制造企业。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "6家试点客户的平均投资回收期为14个月。",
+          "expected_flag": false,
+          "predicted_status": "supported",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "截至目前，竞品一体机成交价区间为35万元至80万元。",
+          "expected_flag": true,
+          "predicted_status": "stale",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "竞争对手甲2025年相关业务收入为12亿元。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "竞争对手乙在全国市场的份额为40%。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "现行政策要求所有工厂在2027年前部署AI质检系统。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        },
+        {
+          "text": "项目可以无条件在全国全面商业化，无需补充验证。",
+          "expected_flag": true,
+          "predicted_status": "conflict",
+          "evidence_top5_hit": true
+        }
+      ]
+    }
+  ]
+}

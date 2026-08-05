@@ -1,0 +1,54 @@
+name: generic-zh
+version: 3
+freshness_terms: [最新, 当前, 截至目前, 目前, 本月, 本季度, 有效, 现行]
+expiry_terms: [有效期至, 到期, 失效, 过期, 有效截止]
+freshness_window_days: 548
+retrieval:
+  minimum_score: 0.08
+ocr:
+  review_below: 0.72
+severity:
+  numeric_mismatch: high
+  unit_mismatch: high
+  entity_mismatch: high
+  scope_mismatch: high
+  missing_evidence: high
+  source_conflict: high
+  partial_support: medium
+  stale_evidence: medium
+  ocr_uncertainty: medium
+exclusive_categories:
+  - id: tax-basis
+    issue_code: scope_mismatch
+    values:
+      tax_included: [含税, 价税合计, 税后]
+      tax_excluded: [未税, 不含税, 税前]
+  - id: delivery-day-basis
+    issue_code: unit_mismatch
+    values:
+      workday: [工作日, 个工作日]
+      calendar_day: [自然日, 个自然日]
+  - id: comparison-period
+    issue_code: scope_mismatch
+    values:
+      yoy: [同比, 去年同期]
+      mom: [环比, 上月, 上期]
+  - id: geography-scope
+    issue_code: scope_mismatch
+    values:
+      nationwide: [全国, 全国范围]
+      east_china: [华东, 华东区域, 江浙沪]
+      south_china: [华南, 华南区域]
+      north_china: [华北, 华北区域]
+  - id: follow-up-requirement
+    issue_code: qualifier_overreach
+    values:
+      required: [仍需, 需要补充, 需补充, 补充验证后, 待验证]
+      not_required: [无需补充, 无需, 不需要, 免于补充]
+source_authority:
+  - level: primary
+    patterns: [合同, 回单, 发票, 系统明细, 订单, 验收, 检测报告, 证书]
+  - level: derived
+    patterns: [测算, 汇总, 分析]
+  - level: self_reported
+    patterns: [自述, 说明, 报价单, 纪要]
