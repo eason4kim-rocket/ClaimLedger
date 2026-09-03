@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClaimLedger — 让智能扎根终端 | Apple Keynote Edition</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    :root {
+      --apple-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    body {
+      background-color: #000000;
+      color: #f5f5f7;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "PingFang SC", "Helvetica Neue", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .text-metal {
+      background: linear-gradient(180deg, #FFFFFF 20%, #A1A1A6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .text-metal-sub {
+      background: linear-gradient(180deg, #E5E5EA 0%, #8E8E93 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .aurora-glow {
+      position: relative;
+    }
+    .aurora-glow::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 29px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255, 45, 85, 0.6) 0%, rgba(175, 82, 222, 0.6) 35%, rgba(90, 200, 250, 0.6) 70%, rgba(48, 209, 88, 0.6) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .bento-card {
+      background: #161617;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.12), 0 24px 48px -12px rgba(0, 0, 0, 0.8);
+      border-radius: 28px;
+      transition: transform 0.4s var(--apple-ease), border-color 0.4s var(--apple-ease);
+    }
+    .bento-card:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-2px);
+    }
+    .bento-card-sub {
+      background: #1d1d1f;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+    }
+    .tnum {
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.04em;
+    }
+    .apple-slide {
+      opacity: 0;
+      transform: scale(0.96);
+      filter: blur(4px);
+      pointer-events: none;
+      transition: opacity 0.5s var(--apple-ease), transform 0.5s var(--apple-ease), filter 0.5s var(--apple-ease);
+    }
+    .apple-slide.active {
+      opacity: 1;
+      transform: scale(1);
+      filter: blur(0);
+      pointer-events: auto;
+      z-index: 20;
+    }
+    .apple-slide.prev {
+      opacity: 0;
+      transform: scale(1.04);
+      filter: blur(6px);
+      pointer-events: none;
+    }
+    kbd {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Mono", Menlo, monospace;
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+</head>
+<body class="overflow-hidden select-none h-screen w-screen relative bg-black">
+
+  <header class="absolute top-0 left-0 right-0 z-50 px-10 py-6 flex items-center justify-between pointer-events-auto">
+    <div class="flex items-center space-x-3">
+      <span class="text-xs font-semibold tracking-wide text-[#86868b]">ClaimLedger</span>
+      <span class="text-[#424245]">/</span>
+      <span class="text-xs font-medium text-[#f5f5f7]">Intel Connection 2026 Special Event</span>
+    </div>
+
+    <div class="flex items-center space-x-2">
+      <span class="text-xs font-mono text-[#86868b] tnum">
+        <span id="currentNum" class="text-[#f5f5f7] font-semibold">01</span> / 12
+      </span>
+    </div>
+  </header>
+
+  <div class="absolute top-0 left-0 right-0 h-[2px] bg-white/[0.06] z-50">
+    <div id="topProgressBar" class="h-full bg-white transition-all duration-500 ease-out" style="width: 8.33%;"></div>
+  </div>
+
+  <main id="deckStage" class="w-full h-full relative">
+
+    <!-- SLIDE 1: 封面 -->
+    <section class="apple-slide active absolute inset-0 flex flex-col items-center justify-center p-12 text-center" data-index="1">
+      <div class="max-w-4xl space-y-6">
+        <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-[#1d1d1f] border border-white/10 text-xs text-[#86868b] font-medium tracking-wide">
+          Agentic PC Skills · 全国总决赛线下路演
+        </div>
+
+        <h1 class="text-7xl md:text-8xl font-semibold tracking-tighter leading-[1.05] text-metal">
+          让智能扎根终端。
+        </h1>
+
+        <p class="text-3xl md:text-4xl font-normal text-[#86868b] tracking-tight leading-relaxed max-w-3xl mx-auto">
+          AI 写完以后，<span class="text-[#f5f5f7] font-medium">谁来证明它可以交付？</span>
+        </p>
+
+        <div class="pt-8 space-y-3">
+          <div class="inline-block text-2xl font-semibold tracking-tight text-white px-6 py-2 rounded-2xl bg-[#161617] border border-white/10 shadow-2xl">
+            ClaimLedger
+          </div>
+          <p class="text-xs text-[#6e6e73] tracking-wider uppercase font-mono">
+            Intel® Core™ Ultra · OpenVINO™ · ModelScope Agent Skills
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: 时代困局 -->
+    <section class="apple-slide absolute inset-0 flex flex-col justify-center px-20 py-16" data-index="2">
+      <div class="max-w-6xl w-full mx-auto space-y-8">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-widest text-[#86868b]">The Bottleneck</span>
+          <h2 class="text-5xl md:text-6xl font-semibold tracking-tighter text-metal mt-2">
+            时代困局：交付信任赤字。
+          </h2>
+          <p class="text-xl text-[#86868b] tracking-tight mt-2">
+            生产力爆发了 100 倍，但交付审批的门禁，一毫米都没有动。
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6">
+          <div class="bento-card p-10 flex flex-col justify-between h-[340px]">
+            <div>
+              <span class="text-xs font-mono uppercase tracking-wider text-[#86868b]">Generation Speed</span>
+              <div class="text-7xl font-semibold text-metal tnum mt-4">30 秒</div>
+              <p class="text-lg text-[#86868b] mt-3 leading-relaxed">
+                大模型瞬间生成 30 页辞藻华丽、格式无懈可击的商业草案。
+              </p>
+            </div>
+            <div class="pt-4 border-t border-white/[0.06] text-xs text-[#6e6e73]">
+              虚构发票代码 · 税前到岸混淆 · 隐藏对赌被抹平
+            </div>
+          </div>
+
+          <div class="bento-card p-10 flex flex-col justify-between h-[340px] border-rose-500/20">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono uppercase tracking-wider text-[#ff453a]">Human Verification</span>
+                <span class="text-[11px] px-2.5 py-0.5 rounded-full bg-rose-500/10 text-[#ff453a] font-medium">终身追责</span>
+              </div>
+              <div class="text-7xl font-semibold text-[#ff453a] tnum mt-4">3 整天</div>
+              <p class="text-lg text-[#86868b] mt-3 leading-relaxed">
+                面对严密的公文审批制度，经办人看不出破绽，不敢签字背书。
+              </p>
+            </div>
+            <div class="pt-4 border-t border-white/[0.06] text-xs text-[#86868b]">
+              国资委 37 号令（倒查二十年）· 全球加航 AI 败诉判例
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center text-sm text-[#86868b] pt-2">
+          企业不缺帮着写字的花哨作家，真正急缺的是敢替领导把关的<span class="text-[#f5f5f7] font-medium">“数字审计员”</span>。
+        </p>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: 致命暗礁 -->
+    <section class="apple-slide absolute inset-0 flex flex-col justify-center px-20 py-16" data-index="3">
+      <div class="max-w-6xl w-full mx-auto space-y-6">
+        <div class="flex items-baseline justify-between">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-widest text-[#ff453a]">Case Study · CL-PROC-001</span>
+            <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-metal mt-1">
+              千万级采购报告里的三颗毒药。
+            </h2>
+          </div>
+          <span class="text-xs text-[#86868b] font-mono">1,080 万元年度续签 · 100% 真实数据</span>
+        </div>
+
+        <div class="grid grid-cols-12 gap-6 h-[400px]">
+          <div class="col-span-7 bento-card p-8 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono uppercase text-[#ff453a] font-semibold">Poison 02 · 算力虚饰</span>
+                <span class="text-xs font-mono text-[#86868b]">02_TCO测算.xlsx</span>
+              </div>
+
+              <div class="mt-5 space-y-3">
+                <div class="p-3.5 rounded-2xl bg-[#1d1d1f] border border-white/5">
+                  <div class="text-xs text-[#86868b]">AI 报告虚报：</div>
+                  <div class="text-xl font-medium text-white mt-1">“每年节省 <span class="text-[#ff453a] font-semibold">168 万元</span>，到岸成本全场最低”</div>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-black/60 border border-white/10 font-mono text-xs space-y-2">
+                  <div class="flex items-center justify-between text-[#86868b]">
+                    <span>单元格 <strong class="text-white">公式说明!C3</strong> 拓扑求值：</span>
+                    <span class="text-[#30d158] font-bold text-sm">¥ 721,600</span>
+                  </div>
+                  <div class="flex items-center justify-between text-[#86868b] pt-1 border-t border-white/5">
+                    <span>单元格 <strong class="text-white">TCO复核!K3</strong> 真实综合排名：</span>
+                    <span class="text-[#ff453a] font-bold">第 3 名 (倒数第一)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-xs text-[#ff453a] font-medium">
+              ⚠️ 虚夸节约 96 万元 · 实际到岸成本全场最贵
+            </div>
+          </div>
+
+          <div class="col-span-5 flex flex-col space-y-6">
+            <div class="flex-1 bento-card p-6 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-mono uppercase text-[#ff453a] font-semibold">Poison 01 · 决策越权</span>
+                  <span class="text-xs font-mono text-[#86868b]">红头纪要</span>
+                </div>
+                <div class="text-sm text-[#86868b] mt-3">
+                  报告：<span class="text-white">“批准 B 占 70% 份额”</span>
+                </div>
+                <div class="text-sm text-[#30d158] mt-1">
+                  纪要第 3 段：<span class="font-medium">“仅批准试供 30%，A 保留 70%”</span>
+                </div>
+              </div>
+              <div class="text-xs text-[#ff453a] font-medium pt-2 border-t border-white/5">
+                ⚠️ 份额彻底颠倒，直接违纪越权
+              </div>
+            </div>
+
+            <div class="flex-1 bento-card p-6 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-mono uppercase text-[#ff453a] font-semibold">Poison 03 · 报价过期</span>
+                  <span class="text-xs font-mono text-[#86868b]">PDF 扫描件</span>
+                </div>
+                <div class="text-sm text-[#86868b] mt-3">
+                  报告：<span class="text-white">“有效至 9 月 30 日”</span>
+                </div>
+                <div class="text-sm text-[#30d158] mt-1">
+                  OCR 第 1 页公章旁手写：<span class="font-medium">“8 月 31 日截止”</span>
+                </div>
+              </div>
+              <div class="text-xs text-[#ff453a] font-medium pt-2 border-t border-white/5">
+                ⚠️ 签约即作废，面临下周停产断供
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: 算力底线 -->
+    <section class="apple-slide absolute inset-0 flex flex-col justify-center px-20 py-16" data-index="4">
+      <div class="max-w-6xl w-full mx-auto space-y-8">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-widest text-[#86868b]">Hardware Sovereignty</span>
+          <h2 class="text-5xl md:text-6xl font-semibold tracking-tighter text-metal mt-2">
+            商业绝密，谁敢上云？
+          </h2>
+          <p class="text-xl text-[#86868b] tracking-tight mt-2">
+            为什么必须是本地 Intel Core Ultra 平台？底线只有两个字：合规。
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8">
+          <div class="bento-card p-10 space-y-6">
+            <span class="text-xs font-mono uppercase tracking-wider text-[#ff453a]">Cloud AI · 违规禁区</span>
+            <ul class="space-y-4 text-sm text-[#86868b] leading-relaxed">
+              <li class="flex items-start space-x-3">
+                <span class="text-[#ff453a] font-bold">✕</span>
+                <span><strong class="text-white">商业绝密泄密风险：</strong> 标底价格、供应商底价一旦发往公网，直接触犯《商业秘密法》与《保密法》；</span>
+              </li>
+              <li class="flex items-start space-x-3">
+                <span class="text-[#ff453a] font-bold">✕</span>
+                <span><strong class="text-white">物理隔离断网环境：</strong> 央国企招投标室、审计机房实行物理断网，根本无法连接外网；</span>
+              </li>
+              <li class="flex items-start space-x-3">
+                <span class="text-[#ff453a] font-bold">✕</span>
+                <span><strong class="text-white">边际成本高昂：</strong> 面对数十万字底层凭证，每一次全量调用公有云 API 都是巨额账单。</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bento-card p-10 space-y-6 aurora-glow">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono uppercase tracking-wider text-[#30d158]">Intel AI PC · 物理主权</span>
+              <span class="text-xs font-mono text-[#f5f5f7] bg-white/10 px-2.5 py-0.5 rounded-full">127.0.0.1</span>
+            </div>
+            <ul class="space-y-4 text-sm text-[#86868b] leading-relaxed">
+              <li class="flex items-start space-x-3">
+                <span class="text-[#30d158] font-bold">✓</span>
+                <span><strong class="text-white">数据绝对不出机：</strong> 默认仅监听本地环回地址，拔掉网线依然全速运行；</span>
+              </li>
+              <li class="flex items-start space-x-3">
+                <span class="text-[#30d158] font-bold">✓</span>
+                <span><strong class="text-white">边际推理成本为 ¥ 0.00：</strong> 依托端侧算力无限吞吐，无需向任何云厂商支付 Token 费用；</span>
+              </li>
+              <li class="flex items-start space-x-3">
+                <span class="text-[#30d158] font-bold">✓</span>
+                <span><strong class="text-white">SHA-256 全流程存证：</strong> 所有输入底稿生成硬件级抗篡改哈希，打造抗倒查的铁证链。</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: 系统架构 -->
+    <section class="apple-slide absolute inset-0 flex flex-col justify-center px-20 py-16" data-index="5">
+      <div class="max-w-6xl w-full mx-auto space-y-8">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-widest text-[#86868b]">Architecture</span>
+          <h2 class="text-5xl md:text-6xl font-semibold tracking-tighter text-metal mt-2">
+            闭环证据审计专家套件。
+          </h2>
+          <p class="text-xl text-[#86868b] tracking-tight mt-2">
+            核心设计哲学：绝不用大模型的不可控概率，去审核大模型的概率幻觉。
+          </p>
+        </div>
+
+        <div class="grid grid-cols-4 gap-5">
+          <div class="bento-card p-6 flex flex-col justify-between h-[280px]">
+            <div>
+              <span class="text-xs font-mono text-[#86868b]">01 / INGESTION</span>
+              <h3 class="text-lg font-semibold text-white mt-3">异构解析与快照</h3>
+              <p class="text-xs text-[#86868b] mt-2 leading-relaxed">
+                原生解析 DOCX、PDF、Excel 及扫描图片。PP-OCRv5 提取高精度坐标，全文件生成 SHA-256 存证快照。
+              </p>
+            </div>
+            <div class="text-[11px] font-mono text-[#6e6e73]">Multi-modal Ingest</div>
+          </div>
+
+          <div class="bento-card p-6 flex flex-col justify-between h-[280px]">
+            <div>
+              <span class="text-xs font-mono text-[#86868b]">02 / AUDIT ENGINE</span>
+              <h3 class="text-lg font-semibold text-white mt-3">确定性规则核验</h3>
+              <p class="text-xs text-[#86868b] mt-2 leading-relaxed">
+                将报告拆解为独立 Claim 断言。物理级穿透绑定源表单元格，比对数学公式、时间序列与权限范围。
+              </p>
+            </div>
+            <div class="text-[11px] font-mono text-[#6e6e73]">Deterministic Rules</div>
+          </div>
+
+          <div class="bento-card p-6 flex flex-col justify-between h-[280px] border-amber-500/30">
+            <div>
+              <span class="text-xs font-mono text-[#ff9f0a]">03 / DELIVERY GATE</span>
+              <h3 class="text-lg font-semibold text-white mt-3">可信交付门禁</h3>
+              <p class="text-xs text-[#86868b] mt-2 leading-relaxed">
+                高危阻断项未得到人类明确裁决前，坚决锁死交付通道！强制专人介入（采纳/驳回/豁免）。
+              </p>
+            </div>
+            <div class="text-[11px] font-mono text-[#ff9f0a]">Human-in-the-loop</div>
+          </div>
+
+          <div class="bento-card p-6 flex flex-col justify-between h-[280px]">
+            <div>
+              <span class="text-xs font-mono text-[#86868b]">04 / ATOMIC EXPORT</span>
+              <h3 class="text-lg font-semibold text-white mt-3">原子化交付包</h3>
+              <p class="text-xs text-[#86868b] mt-2 leading-relaxed">
+                一键生成带原生批注 Word、公式级 Excel 证据台账、完整 JSON 审计轨迹与修正交付稿。
+              </p>
+            </div>
+            <div class="text-[11px] font-mono text-[#6e6e73]">Audit Trail Bundle</div>
+          </div>
+        </div>
+
+        <div class="text-center text-xs text-[#6e6e73] font-mono">
+          DOCX + EVIDENCE PACK ➔ DETERMINISTIC AUDIT ➔ HUMAN REVIEW GATE ➔ VERIFIED ARTIFACTS
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: 算力交响 -->
+    <section class="apple-slide absolute inset-0 flex flex-col justify-center px-20 py-16" data-index="6">
+      <div class="max-w-6xl w-full mx-auto space-y-8">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-widest text-[#86868b]">Silicon Orchestration</span>
+          <h2 class="text-5xl md:text-6xl font-semibold tracking-tighter text-metal mt-2">
+            算力交响：xPU 异构调度。
+          </h2>
+          <p class="text-xl text-[#86868b] tracking-tight mt-2">
+            基于 OpenVINO™，科学分工调度，在轻薄本上实现高吞吐与全天续航。
+          </p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+          <div class="bento-card p-8 space-y-4">
+            <span class="text-xs font-mono uppercase text-[#86868b]">NPU · 低功耗神经单元</span>
+            <div class="text-5xl font-semibold text-metal tnum">单瓦级</div>
+            <h4 class="text-base font-medium text-white">常驻后台守护</h4>
+            <p class="text-xs text-[#86868b] leading-relaxed">
+              全天候轻量文档监听、流式文本预处理与初级向量化，休眠状态无感运行，保障电池续航。
+            </p>
+          </div>
+
+          <div class="bento-card p-8 space-y-4">
+            <span class="text-xs font-mono uppercase text-[#0071e3]">iGPU · 图形引擎</span>
+            <div class="text-5xl font-semibold text-metal tnum">INT4 脉冲</div>
+            <h4 class="text-base font-medium text-white">高并发抽取与重排</h4>
+            <p class="text-xs text-[#86868b] leading-relaxed">
+              调用 OpenVINO GenAI 释放锐炫核显并行吞吐，执行 Qwen3-8B 关键事实提取与证据 Rerank 打分。
+            </p>
+          </div>
+
+          <div class="bento-card p-8 space-y-4">
+            <span class="text-xs font-mono uppercase text-[#30d158]">CPU · 通用核心</span>
+            <div class="text-5xl font-semibold text-metal tnum">零损失</div>
+            <h4 class="text-base font-medium text-white">确定性精确求解</h4>
+            <p class="text-xs text-[#86868b] leading-relaxed">
+              承担绝对不容差错的 Excel 单元格公式拓扑求解、严格规则比对与 SHA-256 防伪签名。
+            </p>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-[#161617] border border-white/[0.08] flex items-center justify-between">
+          <span class="text-sm text-[#86868b]">
+            🧠 <strong class="text-white">阶段性显存释放设计 (Phase-based Loading)：</strong> 模型抽取完成后立即释放显存，转入重排，任务结束进程按 PID 彻底退场，轻薄本绝不爆内存。
+          </span>
+          <span class="text-xs font-mono px-3 py-1 rounded-full bg-white/10 text-white">Peak RSS Managed</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: 生态编排 -->
+    <section class="apple-slide absolute inset-0 flex flex-col justify-center px-20 py-16" data-index="7">
+      <div class="max-w-6xl w-full mx-auto space-y-8">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-widest text-[#86868b]">Ecosystem Mesh</span>
+          <h2 class="text-5xl md:text-6xl font-semibold tracking-tighter text-metal mt-2">
+            生态编排：乐高式专家套件。
+          </h2>
+          <p class="text-xl text-[#86868b] tracking-tight mt-2">
+            具备“被上游 Agent 自动调用，并向下调用专业工具”的双向编排能力。
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8">
+          <div class="bento-card p-8 space-y-5">
+            <span class="text-xs font-mono uppercase text-[#86868b]">Mesh Interoperability</span>
+            <h3 class="text-xl font-semibold text-white">双向互操作性</h3>
+            
+            <div class="space-y-4 text-xs text-[#86868b]">
+              <div class="p-4 rounded-2xl bg-[#1d1d1f]">
+                <strong class="text-[#f5f5f7] block mb-1">1. 作为 Gatekeeper 被上游调用：</strong>
+                QwenWork / Trae 写作 Agent 生成报告后，自动唤起 ClaimLedger 进行真实性核验，打破“自己写自己审”的悖论。
+              </div>
+              <div class="p-4 rounded-2xl bg-[#1d1d1f]">
+                <strong class="text-[#f5f5f7] block mb-1">2. 作为专家中枢向下调用：</strong>
+                检出冲突后，自动调起 Office 批注 Skill、企业微信/飞书审批流机器人以及归档存证插件。
+              </div>
+            </div>
+          </div>
+
+          <div class="bento-card p-8 space-y-5">
+            <span class="text-xs font-mono uppercase text-[#86868b]">Context Efficiency</span>
+            <h3 class="text-xl font-semibold text-white">渐进式披露与自包含 GenUI</h3>
+
+            <div class="space-y-4 text-xs text-[#86868b]">
+              <div class="p-4 rounded-2xl bg-[#1d1d1f]">
+                <strong class="text-[#f5f5f7] block mb-1">三级渐进式披露（Context 零污染）：</strong>
+                元数据 (50 Token) ➔ 核心流程 (几百 Token) ➔ 行业规则包按需动态载入，绝不让冗余规则撑爆上下文。
+              </div>
+              <div class="p-4 rounded-2xl bg-[#1d1d1f]">
+                <strong class="text-[#f5f5f7] block mb-1">单文件自包含 GenUI 决策卡片：</strong>
+                单向自然语言驱动，无 Token 泄漏风险，将冰冷代码变成所见即所得的可视化决策卡。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: 现场实录 —— 交互式可信交付门禁 -->
+    <section class="apple-slide absolute inset-0 flex flex-col justify-center px-20 py-16" data-index="8">
+      <div class="max-w-6xl w-full mx-auto space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-widest text-[#86868b]">Interactive Audit Console</span>
+            <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter text-metal mt-1">
+              现场实录：四步拉平真相。
+            </h2>
+          </div>
+          <button onclick="appleResetAudit()" class="px-4 py-2 rounded-full bg-[#1d1d1f] hover:bg-[#2c2c2e] text-xs font-medium text-[#86868b] hover:text-white transition">
+            重置模拟环境
+          </button>
+        </div>
+
+        <div class="bento-card p-8 space-y-6">
+          <div class="flex items-center justify-between pb-5 border-b border-white/[0.06]">
+            <div>
+              <div class="text-sm font-semibold text-white">任务编号：CL-PROC-001 (年度包装续签)</div>
+              <div class="text-xs text-[#86868b] font-mono mt-0.5">Profile: Balanced (OpenVINO + xPU)</div>
+            </div>
+
+            <div id="appleGateBadge" class="flex items-center space-x-2 px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/30 text-[#ff453a] text-xs font-semibold transition-all duration-500">
+              <span id="appleGateDot" class="w-2 h-2 rounded-full bg-[#ff453a] animate-pulse"></span>
+              <span id="appleGateText">交付闸门锁定 · 3 项高危阻断</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-4 text-xs">
+            <div class="p-5 rounded-2xl bg-[#1d1d1f] border border-white/5 space-y-3">
+              <div class="flex justify-between text-[#86868b] font-mono">
+                <span>01 · 算力虚夸</span>
+                <span class="text-[#ff453a] font-bold">高危</span>
+              </div>
+              <div class="text-sm font-medium text-white">报告：“每年节省 168 万元”</div>
+              <div class="p-3 rounded-xl bg-black/60 font-mono text-[#30d158]">
+                Excel 公式结果：721,600 元
+              </div>
+              <button id="appleFix1" onclick="appleFix(1)" class="w-full py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium transition">
+                采纳事实修正 (72.16万)
+              </button>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-[#1d1d1f] border border-white/5 space-y-3">
+              <div class="flex justify-between text-[#86868b] font-mono">
+                <span>02 · 决策越权</span>
+                <span class="text-[#ff453a] font-bold">高危</span>
+              </div>
+              <div class="text-sm font-medium text-white">报告：“已批准供应商B 占 70%”</div>
+              <div class="p-3 rounded-xl bg-black/60 font-mono text-[#30d158]">
+                纪要第3段：仅批准试供 30%
+              </div>
+              <button id="appleFix2" onclick="appleFix(2)" class="w-full py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium transition">
+                采纳纪要修正 (试供30%)
+              </button>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-[#1d1d1f] border border-white/5 space-y-3">
+              <div class="flex justify-between text-[#86868b] font-mono">
+                <span>03 · 报价过期</span>
+                <span class="text-[#ff9f0a] font-bold">警告</span>
+              </div>
+              <div class="text-sm font-medium text-white">报告：“报价有效至 9月30日”</div>
+              <div class="p-3 rounded-xl bg-black/60 font-mono text-[#30d158]">
+                扫描件 OCR：8月31日截止
+              </div>
+              <button id="appleFix3" onclick="appleFix(3)" class="w-full py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium transition">
+                合规豁免 (主管签字)
+              </button>
+            </div>
+          </div>
+
+          <div class="pt-2 flex items-center justify-between">
+            <span class="text-xs text-[#6e6e73] font-mono">SHA-256 存证：底稿原始状态未遭篡改</span>
+            <button id="appleExportBtn" disabled class="px-6 py-2.5 rounded-full bg-[#1d1d1f] text-[#6e6e73] text-xs font-semibold cursor-not-allowed transition-all duration-500">
+              🔒 生成可信交付包 (门禁锁定中)
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 9: 职场神器 -->
+    <section class="apple-slide absolute inset-0 flex flex-col justify-center px-20 py-16" data-index="9">
+      <div class="max-w-6xl w-full mx-auto space-y-8">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-widest text-[#86868b]">Everyday Productivity</span>
+          <h2 class="text-5xl md:text-6xl font-semibold tracking-tighter text-metal mt-2">
+            职场神器：用铁证终结内耗。
+          </h2>
+          <p class="text-xl text-[#86868b] tracking-tight mt-2">
+            真实运营月报案例（golden-v2/operations），刺破一切报喜不报忧的职场把戏。
+          </p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+          <div class="bento-card p-8 space-y-4">
+            <span class="text-xs font-mono uppercase text-[#ff453a]">01 · 反向造假</span>
+            <h3 class="text-xl font-semibold text-white">连涨跌方向都敢反着写</h3>
+            <div class="space-y-2 text-xs pt-2">
+              <div class="text-[#86868b]">汇报吹嘘：<span class="text-white font-mono">运费环比下降 8%</span></div>
+              <div class="text-[#30d158]">底表真相：<span class="font-mono">运费结算!D3 实际为 +5.7%</span></div>
+            </div>
+            <p class="text-xs text-[#6e6e73] pt-2 leading-relaxed">
+              运费成本大涨 5.7%，向上汇报公然写成降本 8%！
+            </p>
+          </div>
+
+          <div class="bento-card p-8 space-y-4">
+            <span class="text-xs font-mono uppercase text-[#ff453a]">02 · 以偏概全</span>
+            <h3 class="text-xl font-semibold text-white">拿局部最好冒充全国</h3>
+            <div class="space-y-2 text-xs pt-2">
+              <div class="text-[#86868b]">汇报声称：<span class="text-white font-mono">全国仓利用率 82%</span></div>
+              <div class="text-[#30d158]">底表真相：<span class="font-mono">产能利用!B2 全国实际仅 74%</span></div>
+            </div>
+            <p class="text-xs text-[#6e6e73] pt-2 leading-relaxed">
+              82% 仅仅是最好的华东仓，差了整整 8 个百分点！
+            </p>
+          </div>
+
+          <div class="bento-card p-8 space-y-4">
+            <span class="text-xs font-mono uppercase text-[#ff453a]">03 · 事故瞒报</span>
+            <h3 class="text-xl font-semibold text-white">天下太平背后的事故</h3>
+            <div class="space-y-2 text-xs pt-2">
+              <div class="text-[#86868b]">汇报承诺：<span class="text-white font-mono">零重大履约异常</span></div>
+              <div class="text-[#30d158]">底稿确凿：<span class="font-mono">07_RCA.docx 发生 96 票延误</span></div>
+            </div>
+            <p class="text-xs text-[#6e6e73] pt-2 leading-relaxed">
+              明明发生了严重断链延误，月报却敢写零异常！
+            </p>
+          </div>
+        </div>
+
+        <p class="text-center text-xs text-[#86868b]">
+          💡 开会投屏 ClaimLedger，点击质疑一键穿透回跳到源表单元格，用铁证终结跨部门扯皮。
+        </p>
+      </div>
+    </section>
+
+    <!-- SLIDE 10: 严谨工程 -->
+    <section class="apple-slide absolute inset-0 flex flex-col justify-center px-20 py-16" data-index="10">
+      <div class="max-w-6xl w-full mx-auto space-y-8">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-widest text-[#86868b]">Engineering Rigor</span>
+          <h2 class="text-5xl md:text-6xl font-semibold tracking-tighter text-metal mt-2">
+            严谨工程：指标真实可复现。
+          </h2>
+          <p class="text-xl text-[#86868b] tracking-tight mt-2">
+            脱敏行业黄金基准集（golden-v2），87 项自动化回归测试全绿通过。
+          </p>
+        </div>
+
+        <div class="grid grid-cols-4 gap-6">
+          <div class="bento-card p-8 text-center space-y-2">
+            <span class="text-xs font-mono uppercase text-[#86868b]">Precision</span>
+            <div class="text-7xl font-semibold text-metal tnum">100<span class="text-3xl text-[#86868b] font-normal">%</span></div>
+            <p class="text-xs text-[#86868b]">查准率 · 零误报</p>
+          </div>
+
+          <div class="bento-card p-8 text-center space-y-2">
+            <span class="text-xs font-mono uppercase text-[#86868b]">Recall</span>
+            <div class="text-7xl font-semibold text-metal tnum">97.9<span class="text-3xl text-[#86868b] font-normal">%</span></div>
+            <p class="text-xs text-[#86868b]">查全率 · 仅漏微弱扰动</p>
+          </div>
+
+          <div class="bento-card p-8 text-center space-y-2">
+            <span class="text-xs font-mono uppercase text-[#86868b]">Top-5 Grounding</span>
+            <div class="text-7xl font-semibold text-metal tnum">91<span class="text-3xl text-[#86868b] font-normal">%</span></div>
+            <p class="text-xs text-[#86868b]">精确原文坐标定位</p>
+          </div>
+
+          <div class="bento-card p-8 text-center space-y-2">
+            <span class="text-xs font-mono uppercase text-[#30d158]">Tests Passed</span>
+            <div class="text-7xl font-semibold text-[#30d158] tnum">87<span class="text-3xl text-[#86868b] font-normal">/87</span></div>
+            <p class="text-xs text-[#86868b]">自动化回归全绿</p>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-[#161617] border border-white/[0.08] text-xs text-[#6e6e73] space-y-1">
+          <strong class="text-[#86868b]">科学诚实声明：</strong>
+          <p>
+            上述指标来自 100 条结论与 49 处植入业务风险的三行业脱敏重构黄金集。我们恪守数据合规底线，不在比赛中展示真实客户未授权隐私；我们诚实标注 Lite 模式与 Balanced 模式的资源边界，绝不向评委夸大未验证环境。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 11: 商业跨越 -->
+    <section class="apple-slide absolute inset-0 flex flex-col justify-center px-20 py-16" data-index="11">
+      <div class="max-w-6xl w-full mx-auto space-y-8">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-widest text-[#86868b]">Business Transformation</span>
+          <h2 class="text-5xl md:text-6xl font-semibold tracking-tighter text-metal mt-2">
+            商业跨越：从 Demo 到企业产品。
+          </h2>
+          <p class="text-xl text-[#86868b] tracking-tight mt-2">
+            直击企事业单位风控与防追责刚需，商业闭环清晰。
+          </p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+          <div class="bento-card p-8 space-y-4">
+            <span class="text-xs font-mono uppercase text-[#86868b]">Step 01</span>
+            <h3 class="text-xl font-semibold text-white">开源开发者生态</h3>
+            <p class="text-xs text-[#86868b] leading-relaxed">
+              开源核心引擎与规则包协议，吸引全国审计、法务、供应链专家共建垂直行业规则，构建如同防病毒库般的知识壁垒。
+            </p>
+          </div>
+
+          <div class="bento-card p-8 space-y-4 aurora-glow">
+            <span class="text-xs font-mono uppercase text-[#0071e3]">Step 02</span>
+            <h3 class="text-xl font-semibold text-white">AI PC 软硬一体专机</h3>
+            <p class="text-xs text-[#86868b] leading-relaxed">
+              依托 Intel Connection 大会渠道，对接英特尔商用生态与 PC 厂商，推出搭载 Core Ultra 的端侧离线交付审计专家工作站。
+            </p>
+          </div>
+
+          <div class="bento-card p-8 space-y-4">
+            <span class="text-xs font-mono uppercase text-[#86868b]">Step 03</span>
+            <h3 class="text-xl font-semibold text-white">央国企私有节点许可</h3>
+            <p class="text-xs text-[#86868b] leading-relaxed">
+              面向采购部、内控风控室、券商投行质控提供私有化节点年度订阅，将传统 3~5 天人工核对压降至 15 分钟人机闭环。
+            </p>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-[#161617] border border-white/[0.08] text-center text-xs text-[#86868b]">
+          💼 企业可能不舍得为玩具 AI 买单，但绝对愿意为“防贪腐、防审计终身追责、防数百万元履约亏损”的刚需支付重金。
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 12: 尾页升华 -->
+    <section class="apple-slide absolute inset-0 flex flex-col items-center justify-center p-12 text-center" data-index="12">
+      <div class="max-w-4xl space-y-8">
+        <h2 class="text-6xl md:text-7xl font-semibold tracking-tighter leading-[1.08] text-metal">
+          让智能扎根终端。<br>
+          让每一句 AI 结论，<br>
+          <span class="text-white">都经得起终身追责。</span>
+        </h2>
+
+        <div class="grid grid-cols-3 gap-6 pt-4 text-left max-w-3xl mx-auto">
+          <div class="p-5 rounded-2xl bg-[#161617] border border-white/[0.08]">
+            <div class="text-xs font-mono text-[#86868b]">01 / 效率与信任</div>
+            <p class="text-xs text-[#f5f5f7] mt-2 leading-relaxed">生成式 AI 解决了效率，ClaimLedger 解决了信任。</p>
+          </div>
+          <div class="p-5 rounded-2xl bg-[#161617] border border-white/[0.08]">
+            <div class="text-xs font-mono text-[#86868b]">02 / 玩具与生产力</div>
+            <p class="text-xs text-[#f5f5f7] mt-2 leading-relaxed">没有交付门禁的 AI 是玩具，拥有端侧证据链的 AI 才是生产力。</p>
+          </div>
+          <div class="p-5 rounded-2xl bg-[#161617] border border-white/[0.08]">
+            <div class="text-xs font-mono text-[#86868b]">03 / 天马与底线</div>
+            <p class="text-xs text-[#f5f5f7] mt-2 leading-relaxed">AI 负责天马行空，ClaimLedger 负责守住底线。</p>
+          </div>
+        </div>
+
+        <div class="pt-6">
+          <div class="inline-flex items-center space-x-4 px-6 py-2.5 rounded-full bg-[#1d1d1f] border border-white/10 text-xs text-[#86868b]">
+            <span>开源：<strong class="text-white font-mono">github.com/eason4kim-rocket/ClaimLedger</strong></span>
+            <span>·</span>
+            <span>ModelScope: <strong class="text-white font-mono">claimledger-audit</strong></span>
+          </div>
+        </div>
+
+        <p class="text-xs text-[#6e6e73] tracking-wider uppercase font-mono">
+          Intel Connection 2026 · 谢谢各位评委老师！
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 px-6 py-2.5 rounded-full bg-[#1d1d1f]/80 backdrop-blur-2xl border border-white/10 flex items-center space-x-6 shadow-2xl pointer-events-auto">
+    <button onclick="applePrev()" class="text-[#86868b] hover:text-white transition p-1" title="上一页 (←)">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+    </button>
+
+    <div id="appleDots" class="flex items-center space-x-2"></div>
+
+    <button onclick="appleNext()" class="text-[#86868b] hover:text-white transition p-1" title="下一页 (→ 或 空格)">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+    </button>
+
+    <div class="h-3 w-px bg-white/10"></div>
+
+    <button onclick="appleToggleNotes()" id="appleNotesBtn" class="text-xs text-[#86868b] hover:text-white transition flex items-center space-x-1.5" title="现场讲稿备忘 (按 N)">
+      <span>💬 备忘录</span>
+    </button>
+
+    <button onclick="appleFullscreen()" class="text-[#86868b] hover:text-white transition p-1" title="全屏放映 (按 F)">
+      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
+    </button>
+  </nav>
+
+  <aside id="appleNotesDrawer" class="absolute bottom-24 left-1/2 -translate-x-1/2 w-[720px] max-w-[90vw] p-6 rounded-3xl bg-[#1d1d1f]/95 backdrop-blur-3xl border border-white/15 shadow-2xl z-40 transform translate-y-6 opacity-0 pointer-events-none transition-all duration-400 ease-out space-y-3">
+    <div class="flex items-center justify-between pb-2 border-b border-white/10">
+      <span class="text-xs font-semibold text-white flex items-center space-x-2">
+        <span>🎙️ 现场演讲逐字讲稿</span>
+        <span id="notesBadge" class="px-2 py-0.5 rounded-full bg-white/10 text-[10px] font-mono text-[#86868b]">Slide 1</span>
+      </span>
+      <span class="text-[10px] text-[#6e6e73]">按 N 键收起</span>
+    </div>
+    <div id="appleNotesText" class="text-xs text-[#f5f5f7] leading-relaxed max-h-44 overflow-y-auto pr-2"></div>
+  </aside>
+
+  <script>
+    const SLIDES_COUNT = 12;
+    let currentIdx = 1;
+    let notesVisible = false;
+
+    const notes = {
+      1: "各位英特尔的架构师、魔搭社区的技术专家、现场的评委与嘉宾，大家上午好！过去两年，大模型带来了前所未有的效率飞跃，10秒钟就能写出一份30页精美报告。但今天我们提出一个刺痛所有企业高管的灵魂拷问：AI 负责写，到底谁敢签？如果没人敢签字盖章，这究竟算生产力，还是潜在的灾难？今天，我们带来 ClaimLedger —— 让智能扎根终端，让企业放心交付的终极答案！",
+      2: "很多团队都在比拼让 AI 写得更快、更长。但在严肃政企和金融业务中，‘违规投资终身追责、倒查二十年’，在司法判例中企业必须对 AI 虚假承诺负全责！没人愿意拿职业生涯给概率模型赌博。企业现在根本不缺帮着写字的花哨作家，真正急缺的是敢替领导把关、守死底线的‘数字审计员’！",
+      3: "这不是假设，这是真实跑出的案例！1,080 万的年度采购报告，AI 写得无比通顺，却埋了三颗致命毒药：纪要写‘试供 30%’，AI 颠倒成‘主供 70%’；报告吹嘘每年节省 168 万，穿透到底层 Excel C3 单元格实际只有 72 万，综合排名全场倒数第一；报价单扫描件手写 8 月 31 日到期，报告居然敢写 9 月底有效！一旦签字，直接面临审计问责！",
+      4: "台下评委可能会问：为什么不能发给云端大模型审？答案非常简单：商业绝密，谁敢上云？！底价、预算、纪要上传公网就是违纪！而且很多机房根本物理断网。必须有一台机器，能在断网环境下把 17 个文件吃透、把几万行 Excel 算准、把扫描件公章看清。这就是 Intel Core Ultra 与 AI PC 的神圣战场！",
+      5: "ClaimLedger 的设计哲学是：绝不用大模型的不可控概率，去审核大模型的概率幻觉！我们把报告拆解为独立事实断言，回到原始文件、原始页码、Excel 单元格进行物理级对账。更关键的是，我们设计了不可逾越的交付门禁——高风险未被人类专业确认前，坚决锁死交付通道！",
+      6: "在英特尔 Core Ultra 平台上，我们演奏了一场精妙的‘xPU 算力交响乐’！让 NPU 承担常驻低功耗监听，保障移动续航；通过 OpenVINO INT4 量化将 8B 模型调度到 iGPU 上进行高吞吐抽取；让 CPU 专心处理规则比对与表格公式求解。我们实现了阶段性显存释放（Phase-based Loading），用完即释，彻底杜绝轻薄本内存爆炸！",
+      7: "在生态层面，ClaimLedger 绝不是一个孤立脚本，而是一块标准的‘乐高专家积木’！遵循魔搭社区与主流 Agent 规范，既能嵌入 QwenWork、Trae 充当上游写作的‘交付守门人’；又能向下调用 Office 批注与协同通知。三级渐进式披露设计，彻底避免大模型上下文污染！",
+      8: "请看现场实测！报告丢进去，断网启动，不到10秒红灯亮起！交付门禁强行锁死！点击节省168万，瞬间穿透到 Excel C3 单元格，标明真实算式只有 72 万！点击份额70%，直接调出纪要原文；点击有效期，PDF 扫描件 8/31 标得清清楚楚！经办人一键采纳修正，门禁绿灯放行，从致命毒药草稿到完美交付包只用了 2 分钟！",
+      9: "除了采购大案，ClaimLedger 更是日常办公防甩锅神器！物流部月报写‘运费环比下降 8%’，ClaimLedger 一跑，打开底层 D3 单元格，真实数据赫然是‘上涨 5.7%’！连方向都敢反着报！全国产能利用率实际 74%，他们拿华东仓最好的 82% 冒充；发生过 96 票重大延误，月报敢写零异常！有了它，以铁证终结扯皮！",
+      10: "作为开发者，我们始终恪守‘工程诚实’！在包含 100 条结论、49 处业务风险的脱敏黄金集上，我们的查准率达到 100%，查全率达到 97.96%，精确定位召回率 91%！87 项测试全绿通过。我们诚实说明 Lite 与 Balanced 模式的资源边界，绝不在评委面前夸大未验证环境！",
+      11: "ClaimLedger 是一张通往千万级政企采购与内控合规市场的入场券！每一个采购总监、经分主管都在寻找保护自己饭碗的工具。借助 Intel Connection 绿色通道，我们计划联合 OEM 推出软硬一体的‘端侧交付审计工作站’。前端大模型开疆扩土，端侧 ClaimLedger 固若金汤，开启商业化闭环！",
+      12: "PC 曾经是冰冷的计算工具，但今天，当它拥有了端侧理解与确定性证据审计的能力，它就成了每一个专业工作者案头最忠诚的数字卫士！在这个时代，能写出 100 页报告不再稀奇；能用芯片级原生算力和确定性证据证明每一句话真实可信，才是企业的核心竞争力！谢谢大家！"
+    };
+
+    function showSlide(idx) {
+      document.querySelectorAll('.apple-slide').forEach((slide) => {
+        const i = parseInt(slide.getAttribute('data-index'));
+        slide.classList.remove('active', 'prev');
+        if (i === idx) {
+          slide.classList.add('active');
+        } else if (i < idx) {
+          slide.classList.add('prev');
+        }
+      });
+
+      document.getElementById('currentNum').innerText = idx.toString().padStart(2, '0');
+      document.getElementById('topProgressBar').style.width = `${(idx / SLIDES_COUNT) * 100}%`;
+
+      document.querySelectorAll('.apple-dot').forEach((dot, i) => {
+        if (i + 1 === idx) {
+          dot.className = 'apple-dot w-5 h-1.5 rounded-full bg-white transition-all duration-400';
+        } else {
+          dot.className = 'apple-dot w-1.5 h-1.5 rounded-full bg-white/20 transition-all duration-400';
+        }
+      });
+
+      document.getElementById('notesBadge').innerText = `Slide ${idx}`;
+      document.getElementById('appleNotesText').innerText = notes[idx] || "(无讲稿)";
+    }
+
+    function appleNext() {
+      if (currentIdx < SLIDES_COUNT) {
+        currentIdx++;
+        showSlide(currentIdx);
+      }
+    }
+
+    function applePrev() {
+      if (currentIdx > 1) {
+        currentIdx--;
+        showSlide(currentIdx);
+      }
+    }
+
+    function appleToggleNotes() {
+      notesVisible = !notesVisible;
+      const drawer = document.getElementById('appleNotesDrawer');
+      const btn = document.getElementById('appleNotesBtn');
+      if (notesVisible) {
+        drawer.classList.remove('translate-y-6', 'opacity-0', 'pointer-events-none');
+        drawer.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+        btn.classList.add('text-white');
+      } else {
+        drawer.classList.add('translate-y-6', 'opacity-0', 'pointer-events-none');
+        drawer.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+        btn.classList.remove('text-white');
+      }
+    }
+
+    function appleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    let appleIssues = { 1: false, 2: false, 3: false };
+
+    function appleFix(id) {
+      appleIssues[id] = true;
+      const btn = document.getElementById(`appleFix${id}`);
+      btn.innerText = "✓ 已完成事实纠偏";
+      btn.classList.remove('bg-white/10', 'hover:bg-white/20');
+      btn.classList.add('bg-[#30d158]/20', 'text-[#30d158]', 'cursor-default');
+      btn.disabled = true;
+
+      const allDone = appleIssues[1] && appleIssues[2] && appleIssues[3];
+      if (allDone) {
+        const badge = document.getElementById('appleGateBadge');
+        const dot = document.getElementById('appleGateDot');
+        const text = document.getElementById('appleGateText');
+        const exportBtn = document.getElementById('appleExportBtn');
+
+        badge.classList.remove('bg-rose-500/10', 'border-rose-500/30', 'text-[#ff453a]');
+        badge.classList.add('bg-[#30d158]/10', 'border-[#30d158]/30', 'text-[#30d158]');
+        dot.classList.remove('bg-[#ff453a]');
+        dot.classList.add('bg-[#30d158]');
+        text.innerText = "交付门禁放行 · 3 项事实已闭环";
+
+        exportBtn.disabled = false;
+        exportBtn.classList.remove('bg-[#1d1d1f]', 'text-[#6e6e73]', 'cursor-not-allowed');
+        exportBtn.classList.add('bg-white', 'text-black', 'hover:bg-[#f5f5f7]', 'shadow-2xl');
+        exportBtn.innerText = "✓ 生成可信交付包 (SHA-256 存证就绪)";
+      }
+    }
+
+    function appleResetAudit() {
+      appleIssues = { 1: false, 2: false, 3: false };
+      for (let i = 1; i <= 3; i++) {
+        const btn = document.getElementById(`appleFix${i}`);
+        btn.disabled = false;
+        btn.classList.remove('bg-[#30d158]/20', 'text-[#30d158]', 'cursor-default');
+        btn.classList.add('bg-white/10', 'hover:bg-white/20');
+      }
+      document.getElementById('appleFix1').innerText = "采纳事实修正 (72.16万)";
+      document.getElementById('appleFix2').innerText = "采纳纪要修正 (试供30%)";
+      document.getElementById('appleFix3').innerText = "合规豁免 (主管签字)";
+
+      const badge = document.getElementById('appleGateBadge');
+      const dot = document.getElementById('appleGateDot');
+      const text = document.getElementById('appleGateText');
+      const exportBtn = document.getElementById('appleExportBtn');
+
+      badge.classList.add('bg-rose-500/10', 'border-rose-500/30', 'text-[#ff453a]');
+      badge.classList.remove('bg-[#30d158]/10', 'border-[#30d158]/30', 'text-[#30d158]');
+      dot.classList.add('bg-[#ff453a]');
+      dot.classList.remove('bg-[#30d158]');
+      text.innerText = "交付闸门锁定 · 3 项高危阻断";
+
+      exportBtn.disabled = true;
+      exportBtn.classList.add('bg-[#1d1d1f]', 'text-[#6e6e73]', 'cursor-not-allowed');
+      exportBtn.classList.remove('bg-white', 'text-black', 'hover:bg-[#f5f5f7]', 'shadow-2xl');
+      exportBtn.innerText = "🔒 生成可信交付包 (门禁锁定中)";
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        appleNext();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        applePrev();
+      } else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        appleFullscreen();
+      } else if (e.key === 'n' || e.key === 'N') {
+        e.preventDefault();
+        appleToggleNotes();
+      } else if (currentIdx === 8) {
+        if (e.key === '1') appleFix(1);
+        if (e.key === '2') appleFix(2);
+        if (e.key === '3') appleFix(3);
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('appleDots');
+      for (let i = 1; i <= SLIDES_COUNT; i++) {
+        const dot = document.createElement('button');
+        dot.className = `apple-dot w-1.5 h-1.5 rounded-full transition-all duration-400 ${i === 1 ? 'w-5 bg-white' : 'bg-white/20'}`;
+        dot.onclick = () => { currentIdx = i; showSlide(currentIdx); };
+        container.appendChild(dot);
+      }
+      showSlide(1);
+    });
+  </script>
+</body>
+</html>
