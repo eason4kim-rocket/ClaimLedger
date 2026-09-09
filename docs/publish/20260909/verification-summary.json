@@ -1,0 +1,144 @@
+{
+  "disclosure": "公开问题原型驱动、脱敏重构并主动植入风险的可复现合成案例，不是真实客户文件。",
+  "prepared_date": "2026-09-09",
+  "measurement_date": "2026-09-08",
+  "package": {
+    "version": "0.5.1",
+    "build_label": "20260909-stage3",
+    "zip_sha256": "f85d0e8202c6eb004d4ef91d9585ac7d7f66f46cc7b31aaf9383f1a629a7d9f7",
+    "wheel_sha256": "181c27fc623116fd51c2417b3b2fc690abbb778710f0a7f74d1560a8f1cd3bf0",
+    "two_builds_identical": true
+  },
+  "clean_install_tests": {
+    "mac": {
+      "passed": 120,
+      "skipped": 0
+    },
+    "windows": {
+      "passed": 119,
+      "skipped": 1,
+      "skip_reason": "POSIX permission bits are not portable"
+    }
+  },
+  "golden": {
+    "counts": {
+      "labeled_claims": 100,
+      "extracted_claims": 100,
+      "matched_predictions": 100,
+      "all_predictions": 100,
+      "true_positives": 48,
+      "false_positives": 0,
+      "false_negatives": 1,
+      "unlabeled_claims": 0,
+      "unlabeled_risk_predictions": 0,
+      "status_matches": 97,
+      "evidence_expected": 100,
+      "evidence_top5_hits": 93,
+      "high_risk_expected": 41,
+      "high_risk_hits": 36,
+      "issue_true_positives": 83,
+      "issue_false_positives": 18,
+      "issue_false_negatives": 28,
+      "issue_macro_f1_sum": 79.33370000000001,
+      "issue_macro_items": 100
+    },
+    "metrics": {
+      "claim_extraction_precision": 1.0,
+      "claim_extraction_recall": 1.0,
+      "claim_extraction_f1": 1.0,
+      "error_precision": 1.0,
+      "error_recall": 0.9796,
+      "error_f1": 0.9897,
+      "status_accuracy": 0.97,
+      "evidence_top5_recall": 0.93,
+      "high_risk_recall": 0.878,
+      "issue_code_micro_precision": 0.8218,
+      "issue_code_micro_recall": 0.7477,
+      "issue_code_micro_f1": 0.783,
+      "issue_code_macro_f1": 0.7933
+    },
+    "benchmark_log_sha256": "7330cd024a40c657893d5b0c31323b65f6e827155fe6870df11b9585d660c3c3"
+  },
+  "procurement_lite": {
+    "job_id": "job-a869fad5b3d8",
+    "evidence_files": 19,
+    "stage_timings_ms": {
+      "preflight_and_snapshot": 163,
+      "parse_report": 37,
+      "parse_evidence": 107249,
+      "extract_claims": 5,
+      "retrieve_and_verify": 3858,
+      "total": 111396
+    },
+    "peak_rss_bytes": 2156126208,
+    "cli_wall_seconds": 120.828,
+    "ocr_device": "CPU",
+    "audit_log_sha256": "39ef841f59929ff81665c90e490a35f56ac684eb02e1f66b5165a95eab8896e8"
+  },
+  "embedding_microbenchmark": [
+    {
+      "started_utc": "2026-09-08T11:25:18.100165+00:00",
+      "device_requested": "CPU",
+      "status": "passed",
+      "version": "2026.3.1-22476-759c5a6ab8c-releases/2026/3",
+      "device_name": "Intel(R) Core(TM) Ultra 9 285H",
+      "model_sha256": "e34b23fa0e0ba14f87007be2727248817cb2ef4cc6609596508d367441e40a33",
+      "load_ms": 1192.5212999922223,
+      "first_inference_ms": 358.5965000092983,
+      "warm_inference_ms": [
+        140.7284999731928,
+        325.74420000310056,
+        361.6714999952819,
+        369.4699000043329,
+        356.69260000577196
+      ],
+      "warm_mean_ms": 310.861339996336,
+      "shape": [
+        4,
+        1024
+      ],
+      "log_sha256": "a6ea40f52c3cf311774d3e57cbbd8ce7f298763e9775a1203352514837d886ae"
+    },
+    {
+      "started_utc": "2026-09-08T11:26:01.291811+00:00",
+      "device_requested": "GPU",
+      "status": "passed",
+      "version": "2026.3.1-22476-759c5a6ab8c-releases/2026/3",
+      "device_name": "Intel(R) Arc(TM) 140T GPU (32GB) (iGPU)",
+      "model_sha256": "e34b23fa0e0ba14f87007be2727248817cb2ef4cc6609596508d367441e40a33",
+      "load_ms": 2578.6309000104666,
+      "first_inference_ms": 465.21759999450296,
+      "warm_inference_ms": [
+        23.69239999097772,
+        21.738899988122284,
+        21.59280001069419,
+        21.907299989834428,
+        22.704700008034706
+      ],
+      "warm_mean_ms": 22.327219997532666,
+      "shape": [
+        4,
+        1024
+      ],
+      "log_sha256": "1c4b2b4872b8d0b54a04a61c1358201c27e4141990d6949c2daab2e3ddd57537"
+    },
+    {
+      "started_utc": "2026-09-08T11:27:32.300689+00:00",
+      "device_requested": "NPU",
+      "status": "failed",
+      "version": "2026.3.1-22476-759c5a6ab8c-releases/2026/3",
+      "device_name": "Intel(R) AI Boost",
+      "model_sha256": "e34b23fa0e0ba14f87007be2727248817cb2ef4cc6609596508d367441e40a33",
+      "load_ms": 21248.87020001188,
+      "log_sha256": "07eef925dc84aa39c874eea79bd612165f873bb7525452a549d2d3895ed62c79"
+    }
+  ],
+  "boundaries": [
+    "Embedding timings are not end-to-end audit speedups.",
+    "NPU inference failed; enumeration is not usage.",
+    "No physical GPU-disable or AUTO failover verification.",
+    "No new physical offline test. QwenWork cloud dialogue is not entirely offline.",
+    "Replacement verification uses saved candidate evidence only.",
+    "PQR, client blind tests, independent second reviewer and full Balanced remain unvalidated."
+  ]
+}

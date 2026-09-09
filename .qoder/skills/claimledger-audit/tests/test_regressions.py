@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 import fitz
+import os
 import stat
 from docx import Document
 from openpyxl import Workbook
 from pathlib import Path
 
-from claimledger.engine import extract_claims, extract_facts, new_job, run_audit, verify
+from claimledger.engine import extract_claims, extract_facts, lexical_score, new_job, run_audit, verify
 from claimledger.models import IssueCode, JobRequest, Locator, ParsedChunk
 from claimledger.parsers import parse_xlsx, sha256_text
 
@@ -354,6 +355,58 @@ def test_xlsx_rate_cells_keep_exact_cell_locator_and_percent_context(tmp_path):
     assert rate.quote == "准时交付率: 0.932"
 
 
+def test_derived_cost_and_rank_cells_receive_narrow_semantic_bonus():
+    saving_claim = extract_claims([
+        make_chunk(
+            "切换供应商B每年可节省168万元。",
+            chunk_id="report-saving",
+            file_name="report.docx",
+            file_hash="a" * 64,
+        )
+    ])[0]
+    result = make_chunk(
+        "721600",
+        chunk_id="cost-result",
+        file_name="02_三家供应商报价与TCO测算.xlsx",
+        file_hash="b" * 64,
+        source_type="xlsx",
+        context_text="公式说明 | 结果 | B相对A年度成本增加额 | 721600",
+        locator=Locator(kind="sheet_cell", sheet="公式说明", cell="C3"),
+        metadata={"header": "结果", "row_key": "B相对A年度成本增加额"},
+    )
+    supplier = make_chunk(
+        "供应商B",
+        chunk_id="supplier-cell",
+        file_name="02_三家供应商报价与TCO测算.xlsx",
+        file_hash="b" * 64,
+        source_type="xlsx",
+        context_text="TCO复核 | 供应商 | 供应商B",
+        locator=Locator(kind="sheet_cell", sheet="TCO复核", cell="A3"),
+        metadata={"header": "供应商", "row_key": "供应商B"},
+    )
+    assert lexical_score(saving_claim, result) > lexical_score(saving_claim, supplier)
+
+    rank_claim = extract_claims([
+        make_chunk(
+            "供应商B的综合到岸成本最低。",
+            chunk_id="report-rank",
+            file_name="report.docx",
+            file_hash="c" * 64,
+        )
+    ])[0]
+    rank = make_chunk(
+        "3",
+        chunk_id="rank-cell",
+        file_name="02_三家供应商报价与TCO测算.xlsx",
+        file_hash="b" * 64,
+        source_type="xlsx",
+        context_text="TCO复核 | 排名 | 供应商B | 排名: 3",
+        locator=Locator(kind="sheet_cell", sheet="TCO复核", cell="K3"),
+        metadata={"header": "排名", "row_key": "供应商B"},
+    )
+    assert lexical_score(rank_claim, rank) > lexical_score(rank_claim, supplier)
+
+
 def test_partial_pdf_page_failure_marks_evidence_coverage_incomplete(tmp_path):
     report_path = tmp_path / "report.docx"
     report = Document()
@@ -384,5 +437,7 @@ def test_partial_pdf_page_failure_marks_evidence_coverage_incomplete(tmp_path):
     assert completed.coverage_status == "incomplete"
     assert any("contract.pdf page 2" in warning for warning in completed.warnings)
     cache_dir = Path(completed.report_snapshot).parents[2] / "ocr-cache"
-    assert stat.S_IMODE(cache_dir.stat().st_mode) == 0o700
-    assert all(stat.S_IMODE(path.stat().st_mode) == 0o600 for path in cache_dir.iterdir())
+    assert cache_dir.is_dir()
+    if os.name != "nt":
+        assert stat.S_IMODE(cache_dir.stat().st_mode) == 0o700
+        assert all(stat.S_IMODE(path.stat().st_mode) == 0o600 for path in cache_dir.iterdir())

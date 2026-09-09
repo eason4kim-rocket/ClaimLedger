@@ -1,4 +1,8 @@
-# Qoder 与 ModelScope 验证
+# 宿主集成与 ModelScope 验证
+
+优先使用当前宿主实际具备的本地命令执行能力。QwenWork 中读取本 Skill 后运行 CLI，等待任务实际完成，再输出中文简报；不假设存在 Qoder Widget。宿主名称、版本与调用成功须分别实测，QwenWork 与 WorkBuddy 不是同一个产品。云端对话不等于本地离线运行；私有内容未经披露授权不得返回云端宿主。
+
+以下 Qoder 指南仅在用户实际使用该宿主时适用，保留为兼容路径，并非必需安装项。
 
 将本目录放在 `.qoder/skills/claimledger-audit`。启动新的 Qoder 会话或执行 `/skills reload`，在 `/skills` 中确认可发现，然后分别测试 `/claimledger-audit` 和自然语言请求，例如“审计这份报告是否有原始证据支持”。
 

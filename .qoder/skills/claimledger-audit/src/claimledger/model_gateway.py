@@ -2,8 +2,6 @@ from __future__ import annotations
 
 import gc
 import os
-import resource
-import sys
 import threading
 import time
 from pathlib import Path
@@ -14,6 +12,7 @@ from fastapi import Depends, FastAPI, Header, HTTPException
 from pydantic import BaseModel, Field
 
 from .config import model_api_token, models_dir, skill_root
+from .runtime_metrics import peak_rss_bytes
 
 
 class ChatRequest(BaseModel):
@@ -222,8 +221,6 @@ class ModelRuntime:
         return [(int(index), float(score)) for index, score in values[: request.top_n]]
 
     def status(self) -> dict[str, Any]:
-        rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-        peak_rss_bytes = int(rss if sys.platform == "darwin" else rss * 1024)
         return {
             "device": self.device,
             "models": self.models,
@@ -233,7 +230,7 @@ class ModelRuntime:
                 "reranker": self.reranker is not None,
             },
             "timings_ms": self.timings_ms,
-            "peak_rss_bytes": peak_rss_bytes,
+            "peak_rss_bytes": peak_rss_bytes(),
         }
 
 

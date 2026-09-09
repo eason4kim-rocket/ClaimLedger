@@ -2,12 +2,13 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 import uuid
 from pathlib import Path
 from typing import Any
 
-import fitz
+import pymupdf as fitz
 from docx import Document
 from openpyxl import load_workbook
 from PIL import Image
@@ -88,6 +89,14 @@ class OcrEngine:
         if self._engine is not None or self.error:
             return self._engine
         try:
+            paddle_options: dict[str, Any] = {}
+            if os.name == "nt":
+                # PaddlePaddle 3.3.x currently enables the PIR + oneDNN path on
+                # Windows, but PP-OCRv5 contains an ArrayAttribute that this
+                # executor cannot convert. Keep the Windows CPU fallback on the
+                # stable executor until the upstream implementation lands.
+                os.environ.setdefault("FLAGS_enable_pir_api", "0")
+                paddle_options["enable_mkldnn"] = False
             from paddleocr import PaddleOCR
 
             self._engine = PaddleOCR(
@@ -96,6 +105,7 @@ class OcrEngine:
                 use_doc_orientation_classify=True,
                 use_doc_unwarping=False,
                 use_textline_orientation=True,
+                **paddle_options,
             )
         except Exception as exc:  # optional native dependency
             self.error = f"PaddleOCR unavailable: {type(exc).__name__}: {exc}"

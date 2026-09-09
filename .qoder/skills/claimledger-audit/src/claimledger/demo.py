@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import fitz
+import pymupdf as fitz
 from PIL import Image, ImageEnhance, ImageFilter
 from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -14,7 +14,7 @@ from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font, PatternFill
 
 
-DISCLOSURE = "公开问题原型驱动、脱敏重构的可复现实战案例｜非真实客户文件"
+DISCLOSURE = "公开问题原型驱动｜脱敏合成测试文件｜不含客户数据"
 WATERMARK = DISCLOSURE
 
 
@@ -356,7 +356,11 @@ def _procurement_demo(output: Path) -> dict[str, str]:
     formula = tco.create_sheet("公式说明")
     formula.append(["项目", "公式", "结果"])
     formula.append(["供应商B同口径成本", "0.76×1.13+0.018+40000÷12000000", 0.8801])
-    formula.append(["B相对A年度差额", "(0.8801-0.82)×12000000", 721600])
+    formula.append([
+        "B相对A年度成本增加额",
+        "(0.76×1.13+0.018+40000÷12000000-0.82)×12000000",
+        721600,
+    ])
     formula.append(["AI初稿错误节省额", "(0.82-0.68)×12000000", 1680000])
     _style_workbook(tco)
     tco_path = evidence / "02_三家供应商报价与TCO测算.xlsx"

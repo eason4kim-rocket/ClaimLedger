@@ -89,6 +89,7 @@ COVERAGE_ZH = {
 }
 
 MESSAGE_ZH = {
+    "The reported cost change has the opposite direction to the named source delta; no missing currency or magnitude is inferred.": "报告所述成本增减方向与原表命名的差额方向相反；保留原始结果值，不推断缺失的币种、单位或差额大小。",
     "No sufficiently relevant passage was found in the supplied evidence set.": "在所提供的证据材料中未找到足够相关的支持内容。",
     "No relevant evidence candidate was retrieved.": "未召回相关证据候选。",
     "The normalized quantity is present in the evidence.": "证据中存在规范化后可比对的数值。",

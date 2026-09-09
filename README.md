@@ -1,8 +1,10 @@
-# ClaimLedger
+# ClaimLedger：高责任报告交付前证据核验
 
 > AI 写完以后，谁来证明它可以交付？
 
 ClaimLedger 是一个开源的、本地优先的报告证据审计 Skill。它读取一份已经成稿的 DOCX 报告和用户提供的封闭证据包，把报告拆成可核查结论，定位原文证据，检查数字、日期、单位、实体和统计口径，并在人类确认后生成可追溯的交付包。
+
+主场景是央国企／大型制造的重大采购、供应商续签与定标呈批；副场景是集团企业／上市公司的经营分析和履约运营月报。药企／医疗器械 GMP PQR 汇编预审仅为未实测扩展方向，咨询案例保留为技术回归。所有比赛案例均为公开问题原型驱动、脱敏重构并主动植入风险的可复现合成材料，不是真实客户文件。法定药品放行、IPO 全量内核、MES 实时工控和自动法律合规判断不在范围内。
 
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB.svg)](.qoder/skills/claimledger-audit/pyproject.toml)
@@ -119,7 +121,7 @@ Windows PowerShell 将 `.venv/bin/python` 替换为 `.venv\\Scripts\\python.exe`
 
 模型安装会下载第三方权重，执行前请检查磁盘空间和对应许可证。
 
-## 在 Qoder 中使用
+## 在 QwenWork 等宿主中使用
 
 项目级 Skill 位于：
 
@@ -127,14 +129,14 @@ Windows PowerShell 将 `.venv/bin/python` 替换为 `.venv\\Scripts\\python.exe`
 .qoder/skills/claimledger-audit/
 ```
 
-用 Qoder 打开仓库根目录后，新会话可以通过类似请求触发：
+在当前宿主中导入或明确读取 Skill 后，新会话可以通过类似请求触发。QwenWork 已进行本地 CLI 调用验证；Qoder 保留兼容路径，不是必需软件：
 
 ```text
 请使用 ClaimLedger，以 Lite 模式根据 evidence 文件夹审计 report.docx。
 先展示中文风险简报，不要替我自动批准、修改或豁免。
 ```
 
-Skill 会在审计完成后展示“可信交付台”。卡片按钮只表达用户意图；高风险决定仍需复述并获得明确确认。
+Skill 会在审计完成后返回中文简报和本地审阅入口。Qoder 可选组件的卡片按钮只表达用户意图；高风险决定仍需复述并获得明确确认。QwenWork 与 WorkBuddy 不是同一产品。核心工具本地执行不等于云端宿主会话完全离线；真实私有材料的原文或简报进入云端须另获披露授权。
 
 ## 人工决定与交付门禁
 
@@ -178,13 +180,14 @@ Skill 会在审计完成后展示“可信交付台”。卡片按钮只表达�
 
 `demos/golden-v2/` 包含采购、运营和咨询三个脱敏重构案例：100 条结论、49 条植入风险和 36 组证据。这些材料为合成演示数据，不是真实客户文件、客户背书或商用效果承诺。
 
-当前仓库记录的 `lite` 结果为：
+2026-09-08 修复后代码的合成黄金集 `lite` 结果为：
 
 - 三行业风险识别 Precision：100%；
 - 三行业风险识别 Recall：97.96%；
-- 跨行业“文件 + 精确原文 + 精确定位”Top-5 召回率：91%。
+- 跨行业“文件 + 精确原文 + 精确定位”Top-5 召回率：93%；
+- 采购严格证据 Top-5：84.09%；高风险 Recall：87.80%；Issue-code Micro F1：78.30%。
 
-结果、环境和限制见 [benchmark-report.md](docs/benchmark-report.md)。请勿将特定合成数据集成绩外推为生产环境准确率。
+历史评测见 [benchmark-report.md](docs/benchmark-report.md)，修复后结构化摘要见 [verification-summary.json](docs/publish/20260909/verification-summary.json)。数值候选修复后部分指标下降，不能宣称全部提升；请勿将特定合成数据集成绩外推为生产环境准确率。最新候选包以 SHA-256 区分，同一 v0.5.1 版本号不保证已发布远端内容同步。
 
 运行基准：
 
@@ -242,6 +245,7 @@ ClaimLedger/
 - [v0.5.0 已验证能力](docs/verified-capabilities-v0.5.0.md)
 - [v0.5.0 发布验证](docs/release-validation-v0.5.0.md)
 - [一次请求完整流程](docs/one-request-flow-v0.4.1.md)
+- [参赛文章与发布材料](docs/publish/)
 
 ## 隐私与安全
 

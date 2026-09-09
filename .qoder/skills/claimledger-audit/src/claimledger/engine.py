@@ -3,8 +3,6 @@ from __future__ import annotations
 import hashlib
 import math
 import re
-import resource
-import sys
 import time
 import uuid
 from copy import deepcopy
@@ -32,6 +30,7 @@ from .models import (
     ParsedChunk,
 )
 from .parsers import parse_docx, parse_evidence_directory, sha256_file, sha256_text
+from .runtime_metrics import peak_rss_bytes
 from .semantic import LocalSemanticClient, augment_claims
 
 
@@ -370,6 +369,13 @@ def lexical_score(claim: Claim, chunk: ParsedChunk, rules: dict | None = None) -
     header_bonus = min(0.38, header_overlap * 0.55)
     if header and header.lower() in claim.text.lower():
         header_bonus = max(header_bonus, 0.34)
+    derived_metric_bonus = 0.0
+    if "节省" in claim.text and header == "结果" and any(
+        term in chunk.search_text for term in ("成本增加额", "成本差额", "年度差额")
+    ):
+        derived_metric_bonus = 1.60
+    elif any(term in claim.text for term in ("最低", "最高", "排名")) and "排名" in header:
+        derived_metric_bonus = 1.60
     row_key = str(chunk.metadata.get("row_key") or "").strip()
     row_bonus = 0.0
     if row_key:
@@ -431,6 +437,7 @@ def lexical_score(claim: Claim, chunk: ParsedChunk, rules: dict | None = None) -
         + topic_bonus
         + local_topic_bonus
         + header_bonus
+        + derived_metric_bonus
         + row_bonus
         + polarity_bonus
         + category_bonus
@@ -843,6 +850,52 @@ def _material_quantity_facts(claim: Claim) -> list[NormalizedFact]:
     return facts
 
 
+def _structured_cost_direction(claim: Claim, chunk: ParsedChunk) -> CheckDetail | None:
+    """Check the sign of a named cost delta, without inventing its currency.
+
+    A result column may omit units. Its positive 'cost increase' still
+    contradicts a positive saving, but neither a sibling fee nor a currency
+    inferred from the report is a valid substitute for that result cell.
+    This deliberately does not compare magnitudes or evaluate formulas.
+    """
+    if chunk.locator.kind not in {"sheet_cell", "table_cell"}:
+        return None
+    label = str(chunk.metadata.get("row_key") or "")
+    if any(term in claim.text + label for term in ("无法", "不能", "不会", "未能", "并非", "不再", "不是", "假设", "目标")) or re.search(
+        r"(?:不|未|无|没)(?:能|会|法|再)?(?:节省|节约|少支出|多支出|增加|减少|降低)", claim.text + label
+    ):
+        return None
+    decreases = bool(re.search(r"节省|节约|少支出|减少支出|降低成本|(?:成本|费用)(?:降低|减少|下降)", claim.text))
+    increases = bool(re.search(r"多支出|增加支出|(?:成本|费用)(?:增加|上升|上涨)", claim.text))
+    if decreases == increases:
+        return None
+    label_up = bool(re.search(r"(?:成本|费用|支出)(?:增加|上升|上涨)额", label))
+    label_down = bool(re.search(r"(?:成本|费用|支出)(?:减少|下降|降低|节省|节约)额", label))
+    if label_up == label_down:
+        return None
+    expected = _material_quantity_facts(claim)
+    actual = [fact for fact in extract_facts(_numeric_verification_text(chunk)) if fact.kind == "number"]
+    if len(expected) != 1 or len(actual) != 1 or expected[0].base_unit not in {"CNY", "USD"}:
+        return None
+    if actual[0].base_unit not in {None, expected[0].base_unit}:
+        return None
+    expected_value = Decimal(expected[0].base_value or expected[0].value)
+    actual_value = Decimal(actual[0].base_value or actual[0].value)
+    if expected_value == 0 or actual_value == 0:
+        return None
+    expected_sign = (1 if increases else -1) * (1 if expected_value > 0 else -1)
+    actual_sign = (1 if label_up else -1) * (1 if actual_value > 0 else -1)
+    if expected_sign == actual_sign:
+        return None
+    return CheckDetail(
+        code=IssueCode.NUMERIC_MISMATCH,
+        outcome="fail",
+        message="The reported cost change has the opposite direction to the named source delta; no missing currency or magnitude is inferred.",
+        claim_value=claim.text,
+        evidence_value=f"{label}: {chunk.text}",
+    )
+
+
 def _quantity_comparison_candidates(
     claim: Claim,
     candidates: list[tuple[ParsedChunk, float]],
@@ -854,6 +907,20 @@ def _quantity_comparison_candidates(
     comparison_claim = claim.model_copy(update={"facts": material_facts})
     top_chunk, top_score = candidates[0]
     if not material_facts or top_chunk.locator.kind not in {"sheet_cell", "table_cell"}:
+        checks, issues = _quantity_comparison(comparison_claim, _numeric_verification_text(top_chunk))
+        return checks, issues, [top_chunk] * len(checks)
+
+    direction = _structured_cost_direction(claim, top_chunk)
+    if direction:
+        return [direction], [direction.code], [top_chunk]
+    top_numbers = [fact for fact in extract_facts(_numeric_verification_text(top_chunk)) if fact.kind == "number"]
+    if (
+        top_numbers
+        and all(fact.dimension == "scalar" for fact in top_numbers)
+        and all(fact.base_unit in {"CNY", "USD"} for fact in material_facts)
+    ):
+        # A retrieved monetary result without a unit is unresolved, not a
+        # license to compare the claim with any currency elsewhere in a row.
         checks, issues = _quantity_comparison(comparison_claim, _numeric_verification_text(top_chunk))
         return checks, issues, [top_chunk] * len(checks)
 
@@ -903,6 +970,8 @@ def _quantity_comparison_candidates(
 
     claim_tokens = tokenize(claim.text)
     claim_categories = _categories(claim.text, rules)
+    top_categories = _categories(top_chunk.search_text, rules)
+    claim_years = {fact.value[:4] for fact in claim.facts if fact.kind == "date"}
     checks: list[CheckDetail] = []
     issues: list[IssueCode] = []
     used_chunks: list[ParsedChunk] = []
@@ -913,6 +982,29 @@ def _quantity_comparison_candidates(
             if score < max(0.14, top_score * 0.52):
                 continue
             if chunk.locator.kind != top_chunk.locator.kind or chunk.file_hash != top_chunk.file_hash:
+                continue
+            evidence_categories = _categories(chunk.search_text, rules)
+            header_tokens = tokenize(str(chunk.metadata.get("header") or ""))
+            evidence_years = {fact.value[:4] for fact in extract_facts(chunk.search_text) if fact.kind == "date"}
+            # A scope-specific measurement can supersede an unscoped one,
+            # e.g. a hardware-only market row vs a full-market forecast.
+            # Equal currency or an exact value alone is never sufficient.
+            scope_anchor = (
+                bool(claim_tokens & header_tokens)
+                and any(
+                    group not in top_categories and values & evidence_categories.get(group, set())
+                    for group, values in claim_categories.items()
+                )
+                and not _category_conflicts(claim.text, chunk.search_text, rules)
+                and (not claim_years or evidence_years == claim_years)
+            )
+            if top_chunk.locator.sheet and chunk.locator.sheet != top_chunk.locator.sheet and not scope_anchor:
+                continue
+            if top_chunk.locator.table is not None and chunk.locator.table != top_chunk.locator.table:
+                continue
+            top_row = str(top_chunk.metadata.get("row_key") or "")
+            candidate_row = str(chunk.metadata.get("row_key") or "")
+            if top_row and candidate_row and top_row != candidate_row and not scope_anchor:
                 continue
             evidence_facts = [
                 fact
@@ -927,7 +1019,6 @@ def _quantity_comparison_candidates(
             ]
             if not comparable:
                 continue
-            header_tokens = tokenize(str(chunk.metadata.get("header") or ""))
             row_tokens = tokenize(str(chunk.metadata.get("row_key") or ""))
             header_match = (
                 len(claim_tokens & header_tokens) / math.sqrt(len(claim_tokens) * len(header_tokens))
@@ -944,7 +1035,6 @@ def _quantity_comparison_candidates(
                 and (actual.base_value or actual.value) == (expected.base_value or expected.value)
                 for actual in comparable
             )
-            evidence_categories = _categories(chunk.search_text, rules)
             category_score = 0.0
             for group_id, claim_values in claim_categories.items():
                 evidence_values = evidence_categories.get(group_id)
@@ -1732,10 +1822,7 @@ def run_audit(job: AuditJob, store=None) -> tuple[AuditJob, list[ParsedChunk]]:
         apply_profile_guidance(store, job)
         apply_memory_matches(store, job)
     job.status = "completed"
-    rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-    job.runtime_metrics["peak_rss_bytes"] = int(
-        rss if sys.platform == "darwin" else rss * 1024
-    )
+    job.runtime_metrics["peak_rss_bytes"] = peak_rss_bytes()
     _record_timing(job, "total", total_started)
     return job, evidence_chunks
 

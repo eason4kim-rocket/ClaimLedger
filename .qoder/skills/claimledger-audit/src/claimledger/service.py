@@ -7,7 +7,7 @@ import mimetypes
 import secrets
 from pathlib import Path
 
-import fitz
+import pymupdf as fitz
 from docx import Document
 from fastapi import BackgroundTasks, Cookie, Depends, FastAPI, Header, HTTPException, Query
 from fastapi.responses import FileResponse, HTMLResponse, RedirectResponse, Response
